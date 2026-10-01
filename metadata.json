@@ -1,0 +1,6 @@
+{
+  "name": "Pustaka - Simpan Buku & Novel Digital",
+  "description": "Perpustakaan digital pribadi untuk menyimpan ebook, novel, dan dokumen bacaan dengan e-reader modern, text-to-speech, dan pembuat novel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

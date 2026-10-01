@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800" fill="none">
+  <!-- Karya Digital Official Logo matching Logo KD.png exactly -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&amp;family=Lora:wght@500;600;700&amp;display=swap');
+      .kd-brand-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 88px;
+        font-weight: 800;
+        fill: #0E7749;
+        text-anchor: middle;
+      }
+      .kd-brand-tagline {
+        font-family: 'Playfair Display', 'Lora', Georgia, serif;
+        font-size: 40px;
+        font-weight: 600;
+        fill: #0E7749;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <!-- Giant KD Monogram in Official Forest Green #0E7749 -->
+  <g fill="#0E7749">
+    <!-- Letter K Left Vertical Column with Bracketed Serifs -->
+    <!-- Top Serif on K -->
+    <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />
+
+    <!-- Letter K Top Diagonal Arm with Upper-Right Serif -->
+    <path d="M 224 285 L 395 110 L 442 110 L 442 128 C 420 128 406 138 388 160 L 268 290 L 375 422 C 398 450 418 462 445 464 L 445 482 C 415 482 382 475 352 442 L 252 316 L 224 345 L 224 285 Z" />
+    <path d="M 380 110 L 448 110 L 448 128 C 425 128 412 138 392 160 L 360 196 L 330 162 L 380 110 Z" />
+
+    <!-- Letter K Iconic Lower Swooping Calligraphy Tail (cradles underneath D) -->
+    <path d="M 240 310 
+             L 345 428 
+             C 405 496, 488 528, 595 528 
+             C 715 528, 788 496, 820 460 
+             C 830 450, 835 440, 838 428 
+             C 830 460, 762 546, 595 546 
+             C 475 546, 388 510, 318 430 
+             L 224 324 
+             Z" />
+
+    <!-- Letter D Left Vertical Stem -->
+    <path d="M 335 110 L 445 110 L 445 128 C 426 128 416 138 416 160 L 416 450 C 416 472 426 482 445 482 L 445 500 L 335 500 L 335 482 C 354 482 364 472 364 450 L 364 160 C 364 138 354 128 335 128 Z" />
+
+    <!-- Letter D Semicircular Curved Outer Bowl & Oblong Inner Counter -->
+    <path fill-rule="evenodd" clip-rule="evenodd" 
+          d="M 416 110 
+             H 545 
+             C 690 110, 792 196, 792 305 
+             C 792 414, 690 500, 545 500 
+             H 416 
+             V 464 
+             H 540 
+             C 652 464, 725 398, 725 305 
+             C 725 212, 652 146, 540 146 
+             H 416 
+             V 110 
+             Z" />
+  </g>
+
+  <!-- Typography 1: Karya Digital (Matching exact title casing & font from Logo KD.png) -->
+  <text x="475" y="650" class="kd-brand-title">Karya Digital</text>
+
+  <!-- Typography 2: Berkarya Tanpa Sempadan (Official Tagline) -->
+  <text x="475" y="730" class="kd-brand-tagline">Berkarya Tanpa Sempadan</text>
+</svg>
