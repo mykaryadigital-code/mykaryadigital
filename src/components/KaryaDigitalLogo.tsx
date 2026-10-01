@@ -20,12 +20,12 @@ export const KaryaDigitalLogo: React.FC<KaryaDigitalLogoProps> = ({
     }
   }, []);
 
-  // Responsive height matching the navbar without any clipping
+  // Balanced proportional height tokens ensuring zero clipping in 72px header
   const heightClass = {
-    sm: 'h-10',
-    md: 'h-14 sm:h-16',
-    lg: 'h-20 sm:h-24',
-    hero: 'h-32 sm:h-44',
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-11',
+    lg: 'h-14 sm:h-16',
+    hero: 'h-24 sm:h-28',
   }[size];
 
   const logoSrc = customLogoUrl || '/logo_kd.svg';
@@ -38,7 +38,6 @@ export const KaryaDigitalLogo: React.FC<KaryaDigitalLogoProps> = ({
         className={`${heightClass} w-auto object-contain drop-shadow-2xs`}
         loading="eager"
         onError={(e) => {
-          // Fallback if SVG asset is loading
           e.currentTarget.src = '/logo_kd.svg';
         }}
       />

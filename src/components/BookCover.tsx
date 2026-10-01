@@ -101,12 +101,12 @@ export const BookCover: React.FC<BookCoverProps> = ({
 
   const theme = THEME_STYLES[variant] || THEME_STYLES.terracotta;
 
-  // Sizing tokens matching exact proportions of the screenshot
+  // Sizing tokens matching exact proportions (Cover ~220-250px on desktop)
   const sizeClasses = {
     sm: 'w-24 h-34 text-[10px]',
-    md: 'w-48 sm:w-56 h-72 sm:h-80 text-xs',
-    lg: 'w-60 h-88 text-sm',
-    xl: 'w-72 h-104 text-base',
+    md: 'w-36 sm:w-44 h-52 sm:h-60 text-xs',
+    lg: 'w-56 h-80 text-sm',
+    xl: 'w-64 h-96 text-base',
   };
 
   if (coverUrl) {

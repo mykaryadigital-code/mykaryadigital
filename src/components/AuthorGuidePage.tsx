@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   DollarSign,
   BookOpen,
-  Infinity,
   AlertTriangle,
   Gift,
   Building2,
@@ -162,22 +161,22 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
     <div className="space-y-10 pb-16">
       {/* AUTHOR ROYALTY HUB (If Author is Registered) */}
       {authorProfile?.isSubscribed && (
-        <section className="bg-white border-2 border-emerald-500/80 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+        <section className="bg-white border border-[#006B57]/30 rounded-[20px] p-6 sm:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.05)] space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-[#E2E8F0]">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#0E7749]">
+              <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#006B57]">
                 <Wallet className="w-6 h-6" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-xl sm:text-2xl font-bold font-serif-book text-slate-900">
+                  <h2 className="text-xl sm:text-2xl font-bold font-serif-book text-[#102A27]">
                     Papan Pemuka Royalti Penulis
                   </h2>
-                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-[#0E7749]">
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#ECFDF5] text-[#047857]">
                     Akaun Aktif
                   </span>
                 </div>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#64748B]">
                   {authorProfile.name} • {authorProfile.bankName} ({authorProfile.bankAccountNumber})
                 </p>
               </div>
@@ -186,9 +185,9 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             <div className="flex items-center gap-2.5">
               <button
                 onClick={onOpenWriter}
-                className="px-4 py-2 bg-[#0b4d32] hover:bg-[#073623] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+                className="px-4 py-2 bg-[#006B57] hover:bg-[#063F35] text-white rounded-[12px] text-xs font-bold transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
               >
-                <PenSquare className="w-4 h-4" />
+                <PenSquare className="w-4 h-4 text-emerald-100" />
                 <span>Tulis Buku Baru</span>
               </button>
             </div>
@@ -197,57 +196,57 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           {/* 4 Stat Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Stat 1: Baki Royalti */}
-            <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4.5 space-y-1">
-              <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">
+            <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded-[16px] p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-[#063F35] uppercase tracking-wider">
                 Baki Royalti Boleh Dikeluarkan
               </span>
-              <div className="text-2xl sm:text-3xl font-black text-[#0b4d32] font-mono">
+              <div className="text-2xl sm:text-3xl font-black text-[#006B57] font-mono-data">
                 RM {authorProfile.balance.toFixed(2)}
               </div>
-              <span className="text-[10px] text-emerald-600 block">Kredit sedia dipindahkan ke akaun bank</span>
+              <span className="text-[10px] text-[#047857] block">Kredit sedia dipindahkan ke akaun bank</span>
             </div>
 
             {/* Stat 2: Kadar Royalti */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
-              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+            <div className="bg-white border border-[#E2E8F0] rounded-[16px] p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
                 Kadar Royalti Anda
               </span>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+              <div className="text-2xl sm:text-3xl font-black text-[#102A27] font-mono-data">
                 95%
               </div>
-              <span className="text-[10px] text-slate-500 block">Caj platform pengurusan hanya 5%</span>
+              <span className="text-[10px] text-[#64748B] block">Caj platform pengurusan hanya 5%</span>
             </div>
 
             {/* Stat 3: Naskhah Terjual */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
-              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+            <div className="bg-white border border-[#E2E8F0] rounded-[16px] p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
                 Jumlah Buku Terjual
               </span>
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+              <div className="text-2xl sm:text-3xl font-black text-[#102A27] font-mono-data">
                 {stats.totalBooksSold || 2} naskhah
               </div>
-              <span className="text-[10px] text-slate-500 block">Jualan daripada semua tajuk buku</span>
+              <span className="text-[10px] text-[#64748B] block">Jualan daripada semua tajuk buku</span>
             </div>
 
             {/* Stat 4: Status Yuran */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
-              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+            <div className="bg-white border border-[#E2E8F0] rounded-[16px] p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
                 Status Yuran Tahunan
               </span>
-              <div className="text-base sm:text-lg font-bold text-slate-900">
+              <div className="text-base sm:text-lg font-bold text-[#102A27]">
                 Tahun 1 (RM 20)
               </div>
-              <span className="text-[10px] text-emerald-700 font-medium block">
+              <span className="text-[10px] text-[#047857] font-medium block">
                 Pembaharuan tahun depan: RM 10.00 sahaja
               </span>
             </div>
           </div>
 
           {/* Form Pengeluaran Royalti */}
-          <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 space-y-4">
+          <div className="bg-[#F7F9F8] border border-[#E2E8F0] rounded-[16px] p-5 space-y-4">
             <div className="flex items-center gap-2">
-              <ArrowDownToLine className="w-4 h-4 text-[#0b4d32]" />
-              <h3 className="text-sm font-bold text-slate-900">
+              <ArrowDownToLine className="w-4 h-4 text-[#006B57]" />
+              <h3 className="text-sm font-bold text-[#102A27]">
                 Permohonan Pengeluaran Royalti ke Bank ({authorProfile.bankName})
               </h3>
             </div>
@@ -257,7 +256,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 className={`p-3 rounded-xl text-xs font-medium border ${
                   withdrawMsg.type === 'error'
                     ? 'bg-rose-50 border-rose-200 text-rose-800'
-                    : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                    : 'bg-[#ECFDF5] border-[#A7F3D0] text-[#047857]'
                 }`}
               >
                 {withdrawMsg.text}
@@ -266,7 +265,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
 
             <form onSubmit={handleWithdraw} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <div className="relative flex-1">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-xs text-slate-500">RM</span>
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-xs text-[#64748B]">RM</span>
                 <input
                   type="number"
                   step="0.01"
@@ -275,7 +274,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                   value={withdrawAmount}
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   placeholder={`Maksimum RM ${authorProfile.balance.toFixed(2)}`}
-                  className="w-full text-xs font-mono pl-11 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:border-[#0E7749]"
+                  className="w-full text-xs font-mono-data pl-11 pr-4 py-2.5 bg-white border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57]"
                 />
               </div>
 
@@ -283,21 +282,21 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 <button
                   type="button"
                   onClick={() => setWithdrawAmount('50')}
-                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer"
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-50 border border-[#CBD5E1] rounded-[8px] cursor-pointer"
                 >
                   RM50
                 </button>
                 <button
                   type="button"
                   onClick={() => setWithdrawAmount('100')}
-                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer"
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-50 border border-[#CBD5E1] rounded-[8px] cursor-pointer"
                 >
                   RM100
                 </button>
                 <button
                   type="button"
                   onClick={() => setWithdrawAmount(authorProfile.balance.toFixed(2))}
-                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer text-[#0b4d32]"
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-50 border border-[#CBD5E1] rounded-[8px] cursor-pointer text-[#006B57]"
                 >
                   Semua
                 </button>
@@ -306,7 +305,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
               <button
                 type="submit"
                 disabled={isWithdrawing || authorProfile.balance <= 0}
-                className="px-5 py-2.5 bg-[#0b4d32] hover:bg-[#073623] text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                className="px-5 py-2.5 bg-[#006B57] hover:bg-[#063F35] text-white text-xs font-bold rounded-[12px] shadow-xs transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
               >
                 {isWithdrawing ? 'Memproses...' : 'Tarik Tunai Sekarang'}
               </button>
@@ -315,15 +314,15 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
         </section>
       )}
 
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a4a2e] via-[#0E7749] to-[#043d24] text-white p-8 sm:p-12 lg:p-16 shadow-xl border border-emerald-800">
+      {/* 1. Hero Section: Nak Jadi Penulis? */}
+      <section className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#063F35] via-[#006B57] to-[#042821] text-white p-8 sm:p-12 lg:p-14 shadow-lg border border-[#063F35]">
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/20 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
             <Sparkles className="w-4 h-4 text-emerald-300" />
             <span>Nak Jadi Penulis? • Program Penerbitan Karya Digital</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-serif-book leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif-book leading-tight tracking-tight">
             Jana Pendapatan Pasif Berterusan Sebagai Penulis Buku Digital
           </h1>
 
@@ -336,19 +335,19 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           {/* Quick Pillars Badges */}
           <div className="flex flex-wrap gap-2.5 pt-2 text-xs font-semibold text-emerald-100">
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
               Yuran Permulaan: RM20 (Tahun 1)
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
               Tahun Seterusnya: RM10 Sahaja
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
               Royalti 95% Milik Penulis
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
               Karya Unlimited
             </span>
           </div>
@@ -357,7 +356,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           <div className="pt-4 flex flex-wrap items-center gap-4">
             <button
               onClick={scrollToRegistration}
-              className="px-6 py-3.5 bg-white text-[#0a4a2e] hover:bg-emerald-50 rounded-xl font-bold text-sm sm:text-base shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2"
+              className="px-6 py-3.5 bg-white text-[#063F35] hover:bg-emerald-50 rounded-[12px] font-bold text-sm sm:text-base shadow-md transition-transform hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2"
             >
               <span>Daftar Jadi Penulis Sekarang (RM 20)</span>
               <ArrowRight className="w-4 h-4" />
@@ -366,7 +365,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             {onReadGuideBook && (
               <button
                 onClick={onReadGuideBook}
-                className="px-5 py-3.5 bg-emerald-800/80 hover:bg-emerald-800 text-white rounded-xl font-semibold text-sm border border-emerald-600 transition-colors cursor-pointer flex items-center gap-2"
+                className="px-5 py-3.5 bg-white/15 hover:bg-white/20 text-white rounded-[12px] font-semibold text-sm border border-white/20 transition-colors cursor-pointer flex items-center gap-2"
               >
                 <Gift className="w-4 h-4 text-amber-300" />
                 <span>Lihat Panduan Percuma</span>
@@ -374,32 +373,29 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             )}
           </div>
         </div>
-
-        {/* Decorative Abstract Glow */}
-        <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
       </section>
 
       {/* 2. Enam (6) Syarat & Keistimewaan Utama */}
       <section className="space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-extrabold font-serif-book text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif-book text-[#102A27]">
             6 Syarat & Keistimewaan Penulis di Karya Digital
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
+          <p className="text-xs sm:text-sm text-[#64748B]">
             Model penerbitan digital yang telus, adil, mesra penulis, dan beretika tinggi.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {/* Syarat 1: Yuran Permulaan RM20 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#0E7749]">
+          <div className="bg-white border border-[#E2E8F0] rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_25px_rgba(15,23,42,0.06)] transition-all space-y-3">
+            <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#006B57]">
               <DollarSign className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0E7749]">Syarat 1</span>
-              <h3 className="text-base font-bold text-slate-900">Yuran Permulaan: RM 20 (Tahun Pertama)</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#006B57]">Syarat 1</span>
+              <h3 className="text-base font-bold text-[#102A27]">Yuran Permulaan: RM 20 (Tahun Pertama)</h3>
+              <p className="text-xs text-[#64748B] leading-relaxed">
                 Akses penuh selama 1 tahun untuk membuka studio penulisan, memuat naik manuskrip atau fail EPUB/TXT, menetapkan harga,
                 dan menguruskan jualan buku anda tanpa sebarang caj tersembunyi.
               </p>
@@ -407,14 +403,14 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           </div>
 
           {/* Syarat 2: Tahun Seterusnya RM10 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700">
+          <div className="bg-white border border-[#E2E8F0] rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_25px_rgba(15,23,42,0.06)] transition-all space-y-3">
+            <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#006B57]">
               <Award className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700">Syarat 2</span>
-              <h3 className="text-base font-bold text-slate-900">Tahun Seterusnya: RM 10 Sahaja</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#006B57]">Syarat 2</span>
+              <h3 className="text-base font-bold text-[#102A27]">Tahun Seterusnya: RM 10 Sahaja</h3>
+              <p className="text-xs text-[#64748B] leading-relaxed">
                 Yuran pembaharuan tahunan yang sangat mampu milik. Hanya RM 10 setahun untuk mengekalkan kedai dan
                 semua buku anda sentiasa aktif di pasaran pembaca.
               </p>
@@ -422,12 +418,12 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           </div>
 
           {/* Syarat 3: Bebas Unsur Lucah & Seks */}
-          <div className="bg-rose-50/60 border border-rose-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-xl bg-rose-100 border border-rose-300 flex items-center justify-center text-rose-700">
+          <div className="bg-rose-50/50 border border-rose-200 rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] space-y-3">
+            <div className="w-12 h-12 rounded-xl bg-rose-100 border border-rose-300 flex items-center justify-center text-[#E53935]">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-rose-700">Syarat 3 (Wajib)</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#E53935]">Syarat 3 (Wajib)</span>
               <h3 className="text-base font-bold text-rose-950">Tidak Boleh Ada Unsur Lucah & Seks</h3>
               <p className="text-xs text-rose-800/90 leading-relaxed">
                 Semua karya mestilah beretika, sopan, dan selamat untuk dibaca. Sebarang bahan lucah, pornografi, atau
@@ -437,7 +433,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           </div>
 
           {/* Syarat 4: Percuma Panduan Menulis Pantas */}
-          <div className="bg-amber-50/60 border border-amber-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
+          <div className="bg-amber-50/50 border border-amber-200 rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] space-y-3">
             <div className="w-12 h-12 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800">
               <Gift className="w-6 h-6" />
             </div>
@@ -451,190 +447,189 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             </div>
           </div>
 
-          {/* Syarat 5: Jual Buku Unlimited */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700">
-              <Infinity className="w-6 h-6" />
+          {/* Syarat 5: Karya Unlimited */}
+          <div className="bg-white border border-[#E2E8F0] rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_25px_rgba(15,23,42,0.06)] transition-all space-y-3">
+            <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#006B57]">
+              <BookOpen className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700">Syarat 5</span>
-              <h3 className="text-base font-bold text-slate-900">Boleh Jual Buku Sini Unlimited</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Tiada kuota atau had terbitan. Anda boleh menerbitkan 5, 20, atau 100 naskhah novel dan buku resepi
-                tanpa sebarang bayaran tambahan bagi setiap tajuk baru.
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#006B57]">Syarat 5</span>
+              <h3 className="text-base font-bold text-[#102A27]">Penerbitan Karya Tanpa Had (Unlimited)</h3>
+              <p className="text-xs text-[#64748B] leading-relaxed">
+                Tiada had kuantiti! Anda boleh menerbitkan 5, 10, atau 50 tajuk buku sekalipun di bawah satu akaun
+                penulis berdaftar tanpa bayaran slot tambahan.
               </p>
             </div>
           </div>
 
-          {/* Syarat 6: Royalti 5% Platform (95% Penulis) */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all space-y-3 relative overflow-hidden group">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#0E7749]">
-              <ShieldCheck className="w-6 h-6" />
+          {/* Syarat 6: Royalti 95% Telus */}
+          <div className="bg-white border border-[#E2E8F0] rounded-[18px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_10px_25px_rgba(15,23,42,0.06)] transition-all space-y-3">
+            <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#006B57]">
+              <Receipt className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0E7749]">Syarat 6</span>
-              <h3 className="text-base font-bold text-slate-900">Caj Platform 5% (Penulis Dapat 95%)</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#006B57]">Syarat 6</span>
+              <h3 className="text-base font-bold text-[#102A27]">Royalti 95% & Caj Platform 5%</h3>
+              <p className="text-xs text-[#64748B] leading-relaxed">
                 Caj platform yang paling adil di pasaran. Contoh: Buku dijual RM 10.00 &rarr; Penulis terima{' '}
-                <strong>RM 9.50</strong>, manakala platform admin hanya mengambil <strong>RM 0.50</strong>.
+                <strong>RM 9.50</strong>, manakala platform admin hanya mengambil RM 0.50 (5%).
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Interactive Royalty Calculator */}
-      <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-700">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold">
-              <TrendingUp className="w-4 h-4" />
-              <span>Simulasi Anggaran Pendapatan Penulis</span>
+      {/* 3. Kalkulator Interaktif Anggaran Royalti 95% */}
+      <section className="bg-[#063F35] text-white rounded-[24px] p-6 sm:p-10 lg:p-12 shadow-xl border border-[#063F35] space-y-8">
+        <div className="max-w-3xl space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+            <TrendingUp className="w-4 h-4" />
+            <span>Kalkulator Pendapatan Pasif 95%</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif-book">
+            Kira Potensi Pendapatan Royalti Anda
+          </h2>
+          <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed">
+            Gunakan penggelongsor di bawah untuk menganggarkan pendapatan bersih yang bakal anda terima setiap bulan
+            berdasarkan harga buku dan anggaran jumlah salinan yang terjual.
+          </p>
+        </div>
+
+        {/* Sliders & Results Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Sliders Area */}
+          <div className="space-y-6 bg-black/20 p-6 rounded-[18px] border border-white/10">
+            {/* Slider 1: Harga Buku */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-xs">
+                <span className="text-slate-200 font-medium">Harga Seunit Naskhah Buku:</span>
+                <span className="text-base font-bold text-emerald-300 font-mono-data">RM {calcPrice.toFixed(2)}</span>
+              </div>
+              <input
+                type="range"
+                min="5"
+                max="80"
+                step="1"
+                value={calcPrice}
+                onChange={(e) => setCalcPrice(Number(e.target.value))}
+                className="w-full accent-emerald-400 cursor-pointer h-2 bg-white/20 rounded-lg"
+              />
+              <div className="flex justify-between text-[10px] text-slate-300 font-mono-data">
+                <span>RM 5.00</span>
+                <span>RM 40.00</span>
+                <span>RM 80.00</span>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold font-serif-book">
-              Kira Potensi Royalti Bulanan Anda (95% Royalti Bersih)
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Lihat sendiri betapa lumayannya pendapatan anda dengan kadar pemotongan rendah 5% di Karya Digital.
-            </p>
+
+            {/* Slider 2: Anggaran Naskhah Terjual Sebulan */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-xs">
+                <span className="text-slate-200 font-medium">Anggaran Naskhah Terjual Sebulan:</span>
+                <span className="text-base font-bold text-emerald-300 font-mono-data">{calcCopies} naskhah</span>
+              </div>
+              <input
+                type="range"
+                min="10"
+                max="1000"
+                step="10"
+                value={calcCopies}
+                onChange={(e) => setCalcCopies(Number(e.target.value))}
+                className="w-full accent-emerald-400 cursor-pointer h-2 bg-white/20 rounded-lg"
+              />
+              <div className="flex justify-between text-[10px] text-slate-300 font-mono-data">
+                <span>10 naskhah</span>
+                <span>500 naskhah</span>
+                <span>1,000 naskhah</span>
+              </div>
+            </div>
           </div>
 
-          {/* Sliders & Results Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Sliders Area */}
-            <div className="space-y-6 bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80">
-              {/* Slider 1: Harga Buku */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-300 font-medium">Harga Seunit Naskhah Buku:</span>
-                  <span className="text-base font-bold text-emerald-400 font-mono">RM {calcPrice.toFixed(2)}</span>
-                </div>
-                <input
-                  type="range"
-                  min="5"
-                  max="80"
-                  step="1"
-                  value={calcPrice}
-                  onChange={(e) => setCalcPrice(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
-                />
-                <div className="flex justify-between text-[10px] text-slate-500">
-                  <span>RM 5.00</span>
-                  <span>RM 40.00</span>
-                  <span>RM 80.00</span>
-                </div>
+          {/* Results Breakdown Card */}
+          <div className="bg-black/30 p-6 sm:p-8 rounded-[18px] border border-white/15 space-y-5 text-center sm:text-left">
+            <div>
+              <span className="text-xs uppercase tracking-wider font-bold text-emerald-300">
+                Royalti Bersih Masuk Akaun Anda (95%)
+              </span>
+              <div className="text-3xl sm:text-4xl font-black text-white font-mono-data mt-1">
+                RM {authorEarnings.toLocaleString('ms-MY', { minimumFractionDigits: 2 })}
               </div>
+              <span className="text-[11px] text-emerald-200">Setiap bulan (dianggarkan)</span>
+            </div>
 
-              {/* Slider 2: Anggaran Naskhah Terjual Sebulan */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-300 font-medium">Anggaran Naskhah Terjual Sebulan:</span>
-                  <span className="text-base font-bold text-emerald-400 font-mono">{calcCopies} naskhah</span>
-                </div>
-                <input
-                  type="range"
-                  min="10"
-                  max="1000"
-                  step="10"
-                  value={calcCopies}
-                  onChange={(e) => setCalcCopies(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
-                />
-                <div className="flex justify-between text-[10px] text-slate-500">
-                  <span>10 naskhah</span>
-                  <span>500 naskhah</span>
-                  <span>1,000 naskhah</span>
-                </div>
+            <div className="pt-3 border-t border-white/10 space-y-2 text-xs font-mono-data">
+              <div className="flex justify-between text-slate-200">
+                <span>Jumlah Jualan Kasar:</span>
+                <span>RM {totalGross.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-emerald-300 font-bold">
+                <span>Royalti Anda (95%):</span>
+                <span>RM {authorEarnings.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span>Caj Platform (5%):</span>
+                <span>RM {platformCut.toFixed(2)}</span>
               </div>
             </div>
 
-            {/* Results Breakdown Card */}
-            <div className="bg-gradient-to-br from-emerald-950/80 to-[#0a4a2e]/90 p-6 sm:p-8 rounded-2xl border border-emerald-600/40 space-y-5 text-center sm:text-left">
-              <div>
-                <span className="text-xs uppercase tracking-wider font-bold text-emerald-400">
-                  Royalti Bersih Masuk Akaun Anda (95%)
-                </span>
-                <div className="text-3xl sm:text-4xl font-black text-white font-mono mt-1">
-                  RM {authorEarnings.toLocaleString('ms-MY', { minimumFractionDigits: 2 })}
-                </div>
-                <span className="text-[11px] text-emerald-200">Setiap bulan (dianggarkan)</span>
-              </div>
-
-              <div className="pt-3 border-t border-emerald-700/50 space-y-2 text-xs font-mono">
-                <div className="flex justify-between text-slate-300">
-                  <span>Jumlah Jualan Kasar:</span>
-                  <span>RM {totalGross.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-emerald-300">
-                  <span>Royalti Anda (95%):</span>
-                  <strong>RM {authorEarnings.toFixed(2)}</strong>
-                </div>
-                <div className="flex justify-between text-slate-400">
-                  <span>Caj Platform (5%):</span>
-                  <span>RM {platformCut.toFixed(2)}</span>
-                </div>
-              </div>
-
-              <div className="bg-white/10 rounded-xl p-3 text-[11px] text-emerald-100 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
-                <span>
-                  Hanya dengan menjual <strong>2 naskhah</strong> buku, anda sudah pulang modal yuran pendaftaran RM20!
-                </span>
-              </div>
+            <div className="bg-white/10 rounded-xl p-3 text-[11px] text-emerald-100 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
+              <span>
+                Hanya dengan menjual <strong>2 naskhah</strong> buku, anda sudah pulang modal yuran pendaftaran RM20!
+              </span>
             </div>
           </div>
         </div>
       </section>
 
       {/* 4. Showcase Hadiah Bonus Percuma: Ebook Menulis Pantas */}
-      <section className="bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-transparent border border-emerald-200/80 rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+      <section className="bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-transparent border border-[#E2E8F0] rounded-[20px] p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="space-y-4 max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-200">
             <Gift className="w-4 h-4 text-amber-700" />
             <span>Hadiah Percuma Eksklusif Penulis Berdaftar</span>
           </div>
 
-          <h3 className="text-2xl font-bold font-serif-book text-slate-900">
+          <h3 className="text-2xl font-bold font-serif-book text-[#102A27]">
             "Panduan Menulis Buku Dengan Pantas: Dari Idea Menjadi Naskhah Terbitan"
           </h3>
 
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
             Ebook eksklusif ini disusun khas untuk membimbing anda dari zero hingga mempunyai manuskrip lengkap yang
             sedia dijual di pasaran. Bernilai RM 49.00 tetapi diberikan <strong>100% PERCUMA</strong> untuk anda
             sebaik mendaftar sebagai penulis.
           </p>
 
-          <div className="space-y-2 text-xs text-slate-700">
+          <div className="space-y-2 text-xs text-[#102A27]">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#0E7749]" />
+              <CheckCircle2 className="w-4 h-4 text-[#006B57]" />
               <span>Modul 1: Menemukan Idea Emas & Menembusi Writer’s Block</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#0E7749]" />
+              <CheckCircle2 className="w-4 h-4 text-[#006B57]" />
               <span>Modul 2: Teknik Menulis 1,000 Patah Perkataan Setiap Hari</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#0E7749]" />
+              <CheckCircle2 className="w-4 h-4 text-[#006B57]" />
               <span>Modul 3: Membina Tajuk & Kulit Buku yang Menggoda Pembeli</span>
             </div>
           </div>
         </div>
 
-        <div className="shrink-0 flex flex-col items-center text-center p-6 bg-white border border-slate-200 rounded-2xl shadow-sm w-full md:w-64 space-y-3">
-          <div className="w-20 h-28 bg-[#0a4a2e] text-emerald-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-md">
+        <div className="shrink-0 flex flex-col items-center text-center p-6 bg-white border border-[#E2E8F0] rounded-[18px] shadow-sm w-full md:w-64 space-y-3">
+          <div className="w-20 h-28 bg-[#063F35] text-emerald-200 rounded-lg flex flex-col items-center justify-center p-2 shadow-md">
             <BookOpen className="w-8 h-8 text-white mb-1" />
             <span className="text-[9px] font-bold text-center uppercase tracking-wider text-amber-300">
               Ebook Percuma
             </span>
           </div>
           <div className="space-y-1">
-            <span className="text-xs line-through text-slate-400">Harga Asal: RM 49.00</span>
-            <div className="text-base font-black text-[#0E7749]">PERCUMA UNTUK ANDA</div>
+            <span className="text-xs line-through text-[#64748B]">Harga Asal: RM 49.00</span>
+            <div className="text-base font-black text-[#006B57]">PERCUMA UNTUK ANDA</div>
           </div>
           {onReadGuideBook && (
             <button
               onClick={onReadGuideBook}
-              className="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-[#0E7749] border border-emerald-300 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+              className="w-full py-2 bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#006B57] border border-[#A7F3D0] rounded-[12px] text-xs font-bold transition-colors cursor-pointer"
             >
               Baca Pratonton Sekarang
             </button>
@@ -645,42 +640,42 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
       {/* 5. Borang Pendaftaran Penulis Bersepadu */}
       <section
         id="borang-pendaftaran-penulis"
-        className="bg-white border-2 border-emerald-300 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-lg space-y-8"
+        className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-10 lg:p-12 shadow-[0_4px_20px_rgba(15,23,42,0.05)] space-y-8"
       >
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-[#0E7749] text-xs font-bold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#006B57] text-xs font-bold">
             <PenSquare className="w-4 h-4" />
             <span>Borang Pendaftaran Penulis</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif-book text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold font-serif-book text-[#102A27]">
             Daftar Sekarang & Mula Terbitkan Karya Anda
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-[#64748B]">
             Hanya RM 20 untuk tahun pertama (Tahun seterusnya RM 10 sahaja). Tiada yuran tersembunyi.
           </p>
         </div>
 
         {authorProfile?.isSubscribed ? (
-          <div className="bg-emerald-50 border border-emerald-300 rounded-2xl p-6 sm:p-8 text-center space-y-4 max-w-xl mx-auto">
-            <div className="w-16 h-16 bg-[#0E7749] text-white rounded-full flex items-center justify-center mx-auto shadow-md">
+          <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded-[18px] p-6 sm:p-8 text-center space-y-4 max-w-xl mx-auto">
+            <div className="w-16 h-16 bg-[#006B57] text-white rounded-full flex items-center justify-center mx-auto shadow-md">
               <CheckCircle2 className="w-10 h-10" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-xl font-bold text-slate-900">Anda Sudah Berdaftar Sebagai Penulis Sah!</h3>
-              <p className="text-xs text-slate-600">
+              <h3 className="text-xl font-bold text-[#102A27]">Anda Sudah Berdaftar Sebagai Penulis Sah!</h3>
+              <p className="text-xs text-[#64748B]">
                 Akaun atas nama <strong>{authorProfile.name}</strong> ({authorProfile.email}) sedang aktif.
               </p>
             </div>
-            <div className="bg-white p-4 rounded-xl border border-emerald-200 text-xs flex justify-between items-center font-mono">
-              <span className="text-slate-600">Baki Royalti Semasa:</span>
-              <strong className="text-base text-[#0E7749]">RM {authorProfile.balance.toFixed(2)}</strong>
+            <div className="bg-white p-4 rounded-xl border border-[#A7F3D0] text-xs flex justify-between items-center font-mono-data">
+              <span className="text-[#64748B]">Baki Royalti Semasa:</span>
+              <strong className="text-base text-[#006B57]">RM {authorProfile.balance.toFixed(2)}</strong>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <button
                 onClick={onOpenWriter}
-                className="px-6 py-2.5 bg-[#0E7749] hover:bg-[#0a5634] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-2"
+                className="px-6 py-2.5 bg-[#006B57] hover:bg-[#063F35] text-white rounded-[12px] text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
-                <PenSquare className="w-4 h-4" />
+                <PenSquare className="w-4 h-4 text-emerald-100" />
                 <span>Buka Studio Tulis Buku</span>
               </button>
             </div>
@@ -692,7 +687,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 className={`p-4 rounded-xl text-xs font-medium border ${
                   formMsg.type === 'error'
                     ? 'bg-rose-50 border-rose-200 text-rose-800'
-                    : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                    : 'bg-[#ECFDF5] border-[#A7F3D0] text-[#047857]'
                 }`}
               >
                 {formMsg.text}
@@ -700,12 +695,12 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             )}
 
             {/* Pricing Summary Banner */}
-            <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+            <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded-[16px] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
               <div>
-                <span className="font-bold text-[#0E7749] text-sm">Yuran Pendaftaran: RM 20.00</span>
-                <p className="text-slate-500">Tahun Pertama (Tahun berikutnya hanya RM 10.00)</p>
+                <span className="font-bold text-[#006B57] text-sm">Yuran Pendaftaran: RM 20.00</span>
+                <p className="text-[#64748B]">Tahun Pertama (Tahun berikutnya hanya RM 10.00)</p>
               </div>
-              <span className="px-2.5 py-1 bg-white text-[#0E7749] border border-emerald-300 font-bold rounded-lg text-[11px]">
+              <span className="px-2.5 py-1 bg-white text-[#006B57] border border-[#A7F3D0] font-bold rounded-lg text-[11px]">
                 95% Royalti Milik Anda
               </span>
             </div>
@@ -713,8 +708,8 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             {/* Input Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Nama Penuh / Nama Pena Penulis <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-[#102A27] mb-1">
+                  Nama Penuh / Nama Pena Penulis <span className="text-[#E53935]">*</span>
                 </label>
                 <input
                   type="text"
@@ -722,13 +717,13 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="cth. Fatimah Zahra / Penulis Kembara"
-                  className="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E7749] bg-white"
+                  className="w-full text-xs px-3.5 py-2.5 border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57] bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Emel Penulis <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-[#102A27] mb-1">
+                  Emel Penulis <span className="text-[#E53935]">*</span>
                 </label>
                 <input
                   type="email"
@@ -736,14 +731,14 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="penulis@email.com"
-                  className="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E7749] bg-white"
+                  className="w-full text-xs px-3.5 py-2.5 border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57] bg-white"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-[#102A27] mb-1">
                   Nombor Telefon / WhatsApp
                 </label>
                 <input
@@ -751,18 +746,18 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="cth. +6012-3456789"
-                  className="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E7749] bg-white"
+                  className="w-full text-xs px-3.5 py-2.5 border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57] bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Bank Pembayaran Royalti (95%) <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-[#102A27] mb-1">
+                  Bank Pembayaran Royalti (95%) <span className="text-[#E53935]">*</span>
                 </label>
                 <select
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value)}
-                  className="w-full text-xs px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E7749] bg-white cursor-pointer"
+                  className="w-full text-xs px-3.5 py-2.5 border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57] bg-white cursor-pointer"
                 >
                   <option value="Maybank">Maybank (Malayan Banking)</option>
                   <option value="CIMB">CIMB Bank</option>
@@ -778,8 +773,8 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Nombor Akaun Bank Penulis <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold text-[#102A27] mb-1">
+                Nombor Akaun Bank Penulis <span className="text-[#E53935]">*</span>
               </label>
               <input
                 type="text"
@@ -787,22 +782,22 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 value={bankAccountNumber}
                 onChange={(e) => setBankAccountNumber(e.target.value)}
                 placeholder="cth. 164012345678"
-                className="w-full text-xs font-mono px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E7749] bg-white"
+                className="w-full text-xs font-mono-data px-3.5 py-2.5 border border-[#CBD5E1] rounded-[12px] focus:outline-none focus:border-[#006B57] bg-white"
               />
-              <span className="text-[11px] text-slate-400 mt-1 block">
+              <span className="text-[11px] text-[#64748B] mt-1 block">
                 Royalti jualan 95% akan disalurkan terus ke nombor akaun ini.
               </span>
             </div>
 
             {/* Syarat Mutlak: No Pornography / Obscenity Checkbox */}
-            <div className="bg-rose-50/70 border-2 border-rose-200 rounded-2xl p-4 space-y-2">
+            <div className="bg-rose-50/70 border border-rose-200 rounded-[16px] p-4 space-y-2">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
                   required
                   checked={agreedToEtiquette}
                   onChange={(e) => setAgreedToEtiquette(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-rose-600 rounded cursor-pointer"
+                  className="mt-1 w-4 h-4 accent-[#E53935] rounded cursor-pointer"
                 />
                 <div className="text-xs text-rose-950">
                   <strong className="block font-bold mb-0.5">
@@ -819,17 +814,17 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
 
             {/* Payment Selector */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1.5">
+              <label className="block text-xs font-bold text-[#102A27] mb-1.5">
                 Pilih Kaedah Bayaran Yuran RM 20.00
               </label>
               <div className="grid grid-cols-3 gap-2.5">
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('fpx')}
-                  className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
+                  className={`p-3 rounded-[12px] border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
                     paymentMethod === 'fpx'
-                      ? 'border-[#0E7749] bg-emerald-50 text-[#0E7749] shadow-xs'
-                      : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                      ? 'border-[#006B57] bg-[#ECFDF5] text-[#006B57] shadow-xs'
+                      : 'border-[#CBD5E1] text-[#64748B] hover:bg-slate-50'
                   }`}
                 >
                   <Building2 className="w-5 h-5" />
@@ -838,10 +833,10 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('card')}
-                  className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
+                  className={`p-3 rounded-[12px] border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
                     paymentMethod === 'card'
-                      ? 'border-[#0E7749] bg-emerald-50 text-[#0E7749] shadow-xs'
-                      : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                      ? 'border-[#006B57] bg-[#ECFDF5] text-[#006B57] shadow-xs'
+                      : 'border-[#CBD5E1] text-[#64748B] hover:bg-slate-50'
                   }`}
                 >
                   <CreditCard className="w-5 h-5" />
@@ -850,10 +845,10 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('tng')}
-                  className={`p-3 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
+                  className={`p-3 rounded-[12px] border text-xs font-bold flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${
                     paymentMethod === 'tng'
-                      ? 'border-[#0E7749] bg-emerald-50 text-[#0E7749] shadow-xs'
-                      : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                      ? 'border-[#006B57] bg-[#ECFDF5] text-[#006B57] shadow-xs'
+                      : 'border-[#CBD5E1] text-[#64748B] hover:bg-slate-50'
                   }`}
                 >
                   <Sparkles className="w-5 h-5" />
@@ -866,7 +861,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             <button
               type="submit"
               disabled={isProcessing}
-              className="w-full py-4 bg-[#0E7749] hover:bg-[#0a5634] text-white rounded-xl font-bold text-sm sm:text-base shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-[#006B57] hover:bg-[#063F35] text-white rounded-[12px] font-bold text-sm sm:text-base shadow-md transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isProcessing ? (
                 <span>Memproses Pendaftaran Penulis RM 20.00...</span>
@@ -877,7 +872,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
                 </>
               )}
             </button>
-            <p className="text-[11px] text-center text-slate-400">
+            <p className="text-[11px] text-center text-[#64748B]">
               Langganan sah selama 1 tahun. Pembaharuan tahun hadapan hanya RM 10.00.
             </p>
           </form>
@@ -887,26 +882,26 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
       {/* 6. Soalan Lazim (FAQ) */}
       <section className="space-y-4 max-w-3xl mx-auto">
         <div className="text-center space-y-1">
-          <h3 className="text-xl font-bold font-serif-book text-slate-900">
+          <h3 className="text-xl font-bold font-serif-book text-[#102A27]">
             Soalan Lazim Mengenai Penerbitan Penulis
           </h3>
-          <p className="text-xs text-slate-500">Ketahui lebih lanjut mengenai hak cipta, royalti dan syarat terbitan.</p>
+          <p className="text-xs text-[#64748B]">Ketahui lebih lanjut mengenai hak cipta, royalti dan syarat terbitan.</p>
         </div>
 
-        <div className="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 bg-white shadow-xs">
+        <div className="border border-[#E2E8F0] rounded-[18px] overflow-hidden divide-y divide-[#E2E8F0] bg-white shadow-xs">
           {faqs.map((faq, idx) => (
             <div key={idx} className="p-4 transition-colors">
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full flex items-center justify-between text-left font-bold text-xs sm:text-sm text-slate-800 cursor-pointer"
+                className="w-full flex items-center justify-between text-left font-bold text-xs sm:text-sm text-[#102A27] cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-slate-400 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`}
+                  className={`w-4 h-4 text-[#64748B] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`}
                 />
               </button>
               {openFaq === idx && (
-                <p className="text-xs text-slate-600 mt-2 leading-relaxed pl-1 pt-1 border-t border-slate-50">
+                <p className="text-xs text-[#64748B] mt-2 leading-relaxed pl-1 pt-1 border-t border-slate-50">
                   {faq.a}
                 </p>
               )}

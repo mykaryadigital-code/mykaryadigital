@@ -7,21 +7,21 @@
         font-family: 'Playfair Display', Georgia, serif;
         font-size: 88px;
         font-weight: 800;
-        fill: #0E7749;
+        fill: #006B57;
         text-anchor: middle;
       }
       .kd-brand-tagline {
         font-family: 'Playfair Display', 'Lora', Georgia, serif;
         font-size: 40px;
         font-weight: 600;
-        fill: #0E7749;
+        fill: #006B57;
         text-anchor: middle;
       }
     </style>
   </defs>
 
-  <!-- Giant KD Monogram in Official Forest Green #0E7749 -->
-  <g fill="#0E7749">
+  <!-- Giant KD Monogram in Official Forest Green #006B57 -->
+  <g fill="#006B57">
     <!-- Letter K Left Vertical Column with Bracketed Serifs -->
     <!-- Top Serif on K -->
     <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />

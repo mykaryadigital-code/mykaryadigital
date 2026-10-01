@@ -10,9 +10,23 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #faf8f5;
-    color: #1c1917;
+    background-color: #F7F9F8;
+    color: #102A27;
   }
+}
+
+.premium-card-shadow {
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+.premium-card-shadow-hover {
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.premium-card-shadow-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
 }
 
 .font-serif-book {

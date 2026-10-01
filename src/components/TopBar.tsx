@@ -1,22 +1,35 @@
 import React from 'react';
-import { PenSquare, ShieldCheck, User } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Search,
+  PenSquare,
+  User,
+  Wallet,
+} from 'lucide-react';
 import { KaryaDigitalLogo } from './KaryaDigitalLogo';
 import { useMarketplace } from '../context/MarketplaceContext';
 
 interface TopBarProps {
-  currentTab: 'all' | 'reading' | 'shelves' | 'backup' | 'author_guide';
-  onSelectTab: (tab: 'all' | 'reading' | 'shelves' | 'backup' | 'author_guide') => void;
+  isSidebarOpen: boolean;
+  onToggleSidebar: () => void;
+  searchQuery: string;
+  onSearchChange: (q: string) => void;
   onOpenWriter: () => void;
-  onOpenAdminPortal: () => void;
+  onOpenAuthorPortal: () => void;
   onOpenAuthorRegistration: () => void;
+  onOpenProfile: () => void;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
-  currentTab,
-  onSelectTab,
+  isSidebarOpen,
+  onToggleSidebar,
+  searchQuery,
+  onSearchChange,
   onOpenWriter,
-  onOpenAdminPortal,
+  onOpenAuthorPortal,
   onOpenAuthorRegistration,
+  onOpenProfile,
 }) => {
   const { authorProfile } = useMarketplace();
 
@@ -29,157 +42,112 @@ export const TopBar: React.FC<TopBarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-slate-100 shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
-        {/* Brand / Logo: Karya Digital (Ilmu • Amal • Manfaat) */}
-        <div className="flex items-center shrink-0 pr-4 sm:pr-6 mr-1 sm:mr-4 border-r border-slate-200/80">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      <div className="max-w-[1400px] h-[72px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-4">
+        {/* Left Zone: Sidebar Toggle + Brand Logo */}
+        <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
           <button
-            onClick={() => onSelectTab('all')}
-            className="flex items-center text-left cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            onClick={onToggleSidebar}
+            className={`w-10 h-10 rounded-[10px] flex items-center justify-center border transition-all cursor-pointer ${
+              isSidebarOpen
+                ? 'bg-[#ECFDF5] border-[#A7F3D0] text-[#006B57]'
+                : 'bg-slate-50 hover:bg-slate-100 border-[#E2E8F0] text-[#102A27]'
+            }`}
+            title={isSidebarOpen ? 'Tutup Bilah Sisi' : 'Buka Bilah Sisi (Menu & Kategori)'}
+            aria-label="Toggle Sidebar"
+          >
+            {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+
+          <button
+            onClick={onOpenProfile}
+            className="flex items-center text-left cursor-pointer transition-transform hover:scale-[1.01] active:scale-[0.99]"
             title="Karya Digital - Halaman Utama"
           >
             <KaryaDigitalLogo size="md" />
           </button>
         </div>
 
-        {/* Center Nav Links with active green indicator line matching reference */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold">
-          <button
-            onClick={() => onSelectTab('all')}
-            className={`relative py-2 transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'all'
-                ? 'text-slate-900 font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Koleksi Buku
-            {currentTab === 'all' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0E7749] rounded-full" />
+        {/* Center Zone: Search Bar (Desktop / Tablet) */}
+        <div className="flex-1 max-w-md mx-2 sm:mx-6 hidden sm:block">
+          <div className="relative w-full">
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="🔍 Cari buku, penulis atau kategori..."
+              className="w-full h-11 text-xs pl-10 pr-8 bg-[#F8FAFC] hover:bg-white focus:bg-white border border-[#E2E8F0] rounded-[12px] focus:outline-none focus:border-[#006B57] focus:ring-1 focus:ring-[#006B57] transition-all text-[#102A27] placeholder:text-[#94A3B8]"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs p-1"
+                aria-label="Padam Carian"
+              >
+                ✕
+              </button>
             )}
-          </button>
+          </div>
+        </div>
 
+        {/* Right Zone: Primary Actions (Tulis Buku > Royalti Pill > Profile Avatar) */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Quick Royalti Pill (Desktop) */}
           <button
-            onClick={() => onSelectTab('reading')}
-            className={`relative py-2 transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'reading'
-                ? 'text-slate-900 font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            onClick={onOpenAuthorPortal}
+            className="hidden md:flex items-center gap-1.5 h-10 px-3.5 text-xs font-semibold text-[#006B57] bg-[#ECFDF5] hover:bg-[#D1FAE5] border border-[#A7F3D0]/80 rounded-full transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
+            title="Baki Dompet Royalti Penulis (95%)"
           >
-            Sedang Dibaca
-            {currentTab === 'reading' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0E7749] rounded-full" />
-            )}
+            <Wallet className="w-3.5 h-3.5 text-[#006B57]" />
+            <span className="text-[#64748B] font-medium hidden lg:inline">Royalti:</span>
+            <span className="font-mono-data font-bold">
+              RM {authorProfile?.balance !== undefined ? authorProfile.balance.toFixed(2) : '308.75'}
+            </span>
           </button>
 
-          <button
-            onClick={() => onSelectTab('author_guide')}
-            className={`relative py-2 transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'author_guide'
-                ? 'text-[#0E7749] font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Nak Jadi Penulis
-            {currentTab === 'author_guide' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0E7749] rounded-full" />
-            )}
-          </button>
-
-          <button
-            onClick={() => onSelectTab('shelves')}
-            className={`relative py-2 transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'shelves'
-                ? 'text-slate-900 font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Rak Kustom
-            {currentTab === 'shelves' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0E7749] rounded-full" />
-            )}
-          </button>
-
-          <button
-            onClick={() => onSelectTab('backup')}
-            className={`relative py-2 transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'backup'
-                ? 'text-slate-900 font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Cadangan & Impor
-            {currentTab === 'backup' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0E7749] rounded-full" />
-            )}
-          </button>
-        </nav>
-
-        {/* Right Action Buttons matching screenshot: Admin (5%) -> Tulis Buku -> Profile Avatar Circle */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Admin Commission Portal */}
-          <button
-            onClick={onOpenAdminPortal}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100/90 hover:bg-slate-200/80 rounded-full transition-colors cursor-pointer whitespace-nowrap border border-slate-200/60 shadow-2xs"
-            title="Portal Pentadbir: Pantau caj komisen platform 5% & yuran pendaftaran"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-red-600" />
-            <span>Admin (5%)</span>
-          </button>
-
-          {/* Tulis Buku Button */}
+          {/* Primary Action Button: Tulis Buku */}
           <button
             onClick={handleWriteClick}
-            className="flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer whitespace-nowrap border border-slate-200/50 shadow-2xs"
-            title="Tulis buku baharu atau unggah fail naskhah manuskrip"
+            className="flex items-center gap-2 h-10 sm:h-11 px-4 text-xs sm:text-sm font-semibold text-white bg-[#006B57] hover:bg-[#063F35] rounded-[12px] transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+            title="Tulis buku baharu atau unggah manuskrip"
           >
-            <PenSquare className="w-4 h-4 text-slate-700" />
-            <span>Tulis Buku</span>
+            <PenSquare className="w-4 h-4 text-emerald-100" />
+            <span className="whitespace-nowrap hidden xs:inline">Tulis Buku</span>
           </button>
 
-          {/* User Profile Avatar Circle matching red circle in screenshot */}
+          {/* Profile / Account Avatar */}
           <button
-            onClick={() => onSelectTab('author_guide')}
-            className="w-9 h-9 rounded-full bg-[#d91424] hover:bg-red-700 text-white flex items-center justify-center shrink-0 shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
-            title="Profil & Akaun Penulis"
+            onClick={onOpenProfile}
+            className="w-10 h-10 rounded-full bg-white border border-[#E2E8F0] hover:border-[#006B57] text-[#102A27] hover:text-[#006B57] flex items-center justify-center shrink-0 transition-colors shadow-2xs cursor-pointer"
+            title="Profil Penulis & Maklumat Pendaftaran"
+            aria-label="Profil Pengguna"
           >
             <User className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Mobile nav bar */}
-      <div className="md:hidden flex items-center justify-around px-2 py-2 border-t border-slate-100 bg-slate-50 text-xs">
-        <button
-          onClick={() => onSelectTab('all')}
-          className={`px-3 py-1 font-medium ${
-            currentTab === 'all' ? 'text-[#0E7749] font-bold border-b-2 border-[#0E7749]' : 'text-slate-600'
-          }`}
-        >
-          Koleksi
-        </button>
-        <button
-          onClick={() => onSelectTab('reading')}
-          className={`px-3 py-1 font-medium ${
-            currentTab === 'reading' ? 'text-[#0E7749] font-bold border-b-2 border-[#0E7749]' : 'text-slate-600'
-          }`}
-        >
-          Dibaca
-        </button>
-        <button
-          onClick={() => onSelectTab('author_guide')}
-          className={`px-3 py-1 font-medium ${
-            currentTab === 'author_guide' ? 'text-[#0E7749] font-bold border-b-2 border-[#0E7749]' : 'text-slate-600'
-          }`}
-        >
-          Nak Jadi Penulis
-        </button>
-        <button
-          onClick={onOpenAdminPortal}
-          className="px-3 py-1 font-medium text-slate-700"
-        >
-          Admin
-        </button>
+      {/* Mobile Search Bar row (Integrated seamlessly) */}
+      <div className="sm:hidden px-4 pb-2.5 pt-0.5 bg-white border-t border-[#F1F5F9]">
+        <div className="relative w-full">
+          <Search className="w-4 h-4 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="🔍 Cari buku, penulis atau kategori..."
+            className="w-full h-9 text-xs pl-9 pr-7 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[10px] focus:outline-none focus:border-[#006B57] text-[#102A27]"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => onSearchChange('')}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

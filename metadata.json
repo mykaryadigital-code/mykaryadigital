@@ -1,6 +1,6 @@
 {
-  "name": "Pustaka - Simpan Buku & Novel Digital",
-  "description": "Perpustakaan digital pribadi untuk menyimpan ebook, novel, dan dokumen bacaan dengan e-reader modern, text-to-speech, dan pembuat novel.",
+  "name": "Karya Digital - Platform Buku Digital & E-Reader",
+  "description": "Platform koleksi buku digital, e-reader moden dan marketplace penerbitan buku digital dengan sistem royalti 95% untuk penulis.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -25,6 +25,7 @@ export interface PlatformTransaction {
   buyerName?: string;
   buyerEmail?: string;
   totalAmount: number; // e.g. RM 10.00 or RM 20.00
+  amount?: number; // alias for totalAmount
   authorShare: number; // e.g. RM 9.50 (95%)
   platformShare: number; // e.g. RM 0.50 (5%)
   date: string;

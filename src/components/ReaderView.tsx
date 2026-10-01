@@ -289,7 +289,7 @@ export const ReaderView: React.FC<ReaderViewProps> = ({
   // TTS Controls
   const toggleTTS = () => {
     if (!('speechSynthesis' in window)) {
-      alert('Peramban Anda tidak mendukung Text-to-Speech Web Speech API.');
+      console.warn('Peramban ini tidak menyokong fungsi Text-to-Speech.');
       return;
     }
 
@@ -564,11 +564,11 @@ export const ReaderView: React.FC<ReaderViewProps> = ({
                 >
                   <div className="flex justify-between items-center text-sm font-bold">
                     <span>Harga Akses Penuh:</span>
-                    <span className="text-xl text-[#0E7749] font-black">
+                    <span className="text-xl text-[#006B57] font-black">
                       {book.currency || 'RM'} {(book.price || 10).toFixed(2)}
                     </span>
                   </div>
-                  <div className="text-[11px] text-[#0E7749] flex items-center gap-1.5 font-medium pt-1 border-t" style={{ borderColor: currentTheme.toolbarBorder }}>
+                  <div className="text-[11px] text-[#006B57] flex items-center gap-1.5 font-medium pt-1 border-t" style={{ borderColor: currentTheme.toolbarBorder }}>
                     <ShieldCheck className="w-4 h-4 shrink-0" />
                     <span>95% hasil jualan disalurkan terus kepada penulis!</span>
                   </div>
@@ -577,7 +577,7 @@ export const ReaderView: React.FC<ReaderViewProps> = ({
                 <div className="pt-2">
                   <button
                     onClick={() => setIsPurchaseModalOpen(true)}
-                    className="px-7 py-3 bg-[#0E7749] hover:bg-[#0a5634] text-white rounded-xl font-bold text-sm shadow-md transition-colors cursor-pointer inline-flex items-center gap-2"
+                    className="px-7 py-3 bg-[#006B57] hover:bg-[#063F35] text-white rounded-[12px] font-bold text-sm shadow-xs transition-colors cursor-pointer inline-flex items-center gap-2 active:scale-[0.99]"
                   >
                     <Lock className="w-4 h-4" />
                     <span>Beli Akses Buku Penuh Sekarang</span>
