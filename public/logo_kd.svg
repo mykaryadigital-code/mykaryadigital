@@ -1,29 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800" fill="none">
-  <!-- Karya Digital Official Logo matching Logo KD.png exactly -->
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&amp;family=Lora:wght@500;600;700&amp;display=swap');
-      .kd-brand-title {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 88px;
-        font-weight: 800;
-        fill: #006B57;
-        text-anchor: middle;
-      }
-      .kd-brand-tagline {
-        font-family: 'Playfair Display', 'Lora', Georgia, serif;
-        font-size: 40px;
-        font-weight: 600;
-        fill: #006B57;
-        text-anchor: middle;
-      }
-    </style>
-  </defs>
-
-  <!-- Giant KD Monogram in Official Forest Green #006B57 -->
-  <g fill="#006B57">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120" fill="none">
+  <!-- Karya Digital Official Horizontal Brand Lockup -->
+  <!-- 1. Iconic Monogram KD on Left -->
+  <g fill="#006B57" transform="translate(10, 10) scale(0.22)">
     <!-- Letter K Left Vertical Column with Bracketed Serifs -->
-    <!-- Top Serif on K -->
     <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />
 
     <!-- Letter K Top Diagonal Arm with Upper-Right Serif -->
@@ -60,9 +39,7 @@
              Z" />
   </g>
 
-  <!-- Typography 1: Karya Digital (Matching exact title casing & font from Logo KD.png) -->
-  <text x="475" y="650" class="kd-brand-title">Karya Digital</text>
-
-  <!-- Typography 2: Berkarya Tanpa Sempadan (Official Tagline) -->
-  <text x="475" y="730" class="kd-brand-tagline">Berkarya Tanpa Sempadan</text>
+  <!-- 2. Typography on Right -->
+  <text x="200" y="68" fill="#006B57" font-family="'Playfair Display', Georgia, serif" font-size="48" font-weight="800" letter-spacing="-0.5">Karya Digital</text>
+  <text x="202" y="98" fill="#006B57" opacity="0.85" font-family="'Playfair Display', 'Lora', Georgia, serif" font-size="20" font-style="italic" font-weight="600" letter-spacing="1">Berkarya Tanpa Sempadan</text>
 </svg>
