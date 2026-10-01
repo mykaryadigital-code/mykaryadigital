@@ -201,21 +201,27 @@ export const BookCover: React.FC<BookCoverProps> = ({
 
         {theme.illustrationType === 'warrior' && (
           <svg viewBox="0 0 160 90" className="w-full h-full drop-shadow-md" fill="none">
-            {/* Forest jungle silhouette & keris warrior */}
-            <path d="M15 85L30 30L45 85H15Z" fill="#011812" opacity="0.7" />
-            <path d="M115 85L130 25L145 85H115Z" fill="#011812" opacity="0.7" />
-            <circle cx="80" cy="45" r="26" fill="#059669" opacity="0.5" />
-            {/* Warrior holding sword silhouette */}
+            {/* Mosque dome & archway with crescent moon & author silhouette */}
+            <circle cx="80" cy="48" r="28" fill="#047857" opacity="0.35" />
             <path
-              d="M78 40C81 40 83 38 83 35C83 32 81 30 78 30C75 30 73 32 73 35C73 38 75 40 78 40Z"
-              fill="#022c22"
+              d="M87 24C85 24 83 26 83 29C83 32 85 34 87 34C84 34 81 32 81 29C81 26 84 24 87 24Z"
+              fill="#a7f3d0"
+              opacity="0.8"
             />
+            {/* Islamic pointed arch */}
             <path
-              d="M72 42H84L87 56H81L83 80H78L77 62L74 80H69L72 56H68L72 42Z"
-              fill="#011a14"
+              d="M50 85V48C50 36 65 30 80 20C95 30 110 36 110 48V85H50Z"
+              fill="#01241a"
+              opacity="0.85"
             />
-            {/* Sword blade glowing */}
-            <path d="M87 48L102 36L104 38L88 50Z" fill="#34d399" opacity="0.9" />
+            {/* Side minarets */}
+            <rect x="36" y="32" width="6" height="53" fill="#011b13" opacity="0.75" />
+            <polygon points="39,22 36,32 42,32" fill="#011b13" opacity="0.75" />
+            <rect x="118" y="32" width="6" height="53" fill="#011b13" opacity="0.75" />
+            <polygon points="121,22 118,32 124,32" fill="#011b13" opacity="0.75" />
+            {/* Standing figure silhouette */}
+            <circle cx="80" cy="54" r="4" fill="#000f0a" />
+            <path d="M75 62C75 58 78 57 80 57C82 57 85 58 85 62V85H75V62Z" fill="#000f0a" />
           </svg>
         )}
 

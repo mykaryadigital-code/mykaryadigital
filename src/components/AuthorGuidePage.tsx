@@ -12,16 +12,15 @@ import {
   CreditCard,
   ArrowRight,
   TrendingUp,
-  HelpCircle,
   PenSquare,
-  Lock,
   Wallet,
   ChevronDown,
-  Layers,
   Award,
+  ArrowDownToLine,
+  Receipt,
+  User,
 } from 'lucide-react';
 import { useMarketplace } from '../context/MarketplaceContext';
-import { Book } from '../types/book';
 
 interface AuthorGuidePageProps {
   onOpenWriter: () => void;
@@ -34,7 +33,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
   onOpenAuthorDashboard,
   onReadGuideBook,
 }) => {
-  const { authorProfile, subscribeAsAuthor } = useMarketplace();
+  const { authorProfile, stats, transactions, subscribeAsAuthor, withdrawEarnings } = useMarketplace();
 
   // Interactive Calculator State
   const [calcPrice, setCalcPrice] = useState<number>(15);
@@ -50,6 +49,11 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<'fpx' | 'card' | 'tng'>('fpx');
   const [isProcessing, setIsProcessing] = useState(false);
   const [formMsg, setFormMsg] = useState<{ type: 'error' | 'success'; text: string } | null>(null);
+
+  // Royalty Withdrawal State
+  const [withdrawAmount, setWithdrawAmount] = useState<string>('');
+  const [isWithdrawing, setIsWithdrawing] = useState(false);
+  const [withdrawMsg, setWithdrawMsg] = useState<{ type: 'error' | 'success'; text: string } | null>(null);
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -96,6 +100,34 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
     }
   };
 
+  const handleWithdraw = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const amt = parseFloat(withdrawAmount);
+    if (!amt || isNaN(amt) || amt <= 0) {
+      setWithdrawMsg({ type: 'error', text: 'Sila masukkan jumlah pengeluaran yang sah.' });
+      return;
+    }
+    if (!authorProfile || amt > authorProfile.balance) {
+      setWithdrawMsg({ type: 'error', text: 'Baki royalti tidak mencukupi.' });
+      return;
+    }
+
+    setIsWithdrawing(true);
+    setWithdrawMsg(null);
+    try {
+      await withdrawEarnings(amt);
+      setWithdrawMsg({
+        type: 'success',
+        text: `Permohonan pengeluaran RM ${amt.toFixed(2)} ke akaun ${authorProfile.bankName} (${authorProfile.bankAccountNumber}) telah berjaya dihantar!`,
+      });
+      setWithdrawAmount('');
+      setIsWithdrawing(false);
+    } catch (err) {
+      setIsWithdrawing(false);
+      setWithdrawMsg({ type: 'error', text: 'Ralat semasa memproses pengeluaran tunai.' });
+    }
+  };
+
   const scrollToRegistration = () => {
     const el = document.getElementById('borang-pendaftaran-penulis');
     if (el) {
@@ -106,7 +138,11 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
   const faqs = [
     {
       q: 'Bagaimanakah sistem royalti 95% berfungsi?',
-      a: 'Bagi setiap buku yang dibeli oleh pembaca, caj pengurusan dan server platform hanyalah 5%. Baki 95% akan terus dikreditkan ke akaun dompet penulis anda dan boleh dikeluarkan terus ke akaun bank anda pada bila-bila masa.',
+      a: 'Bagi setiap buku yang dibeli oleh pembaca, caj pengurusan dan server platform hanyalah 5%. Baki 95% akan terus dikreditkan ke akaun dompet royalti penulis anda dan boleh dikeluarkan terus ke akaun bank anda pada bila-bila masa.',
+    },
+    {
+      q: 'Mengapakah yuran permulaan RM20 untuk tahun pertama dan RM10 untuk tahun seterusnya?',
+      a: 'Yuran permulaan RM 20 meliputi kos pendaftaran akaun rasmi, akses studio penulisan tanpa had, sistem jualan buku digital, dan hadiah percuma Ebook "Panduan Menulis Buku Dengan Pantas" bernilai RM 49. Tahun seterusnya hanya dikenakan RM 10 setahun untuk mengekalkan kedai dan rak jualan anda sentiasa aktif.',
     },
     {
       q: 'Apakah yang dimaksudkan dengan larangan unsur lucah dan seks?',
@@ -117,21 +153,172 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
       a: 'Sebaik sahaja pendaftaran tahun pertama (RM20.00) disahkan, ebook eksklusif ini akan terus dibuka secara automatik di dalam akaun anda dengan akses penuh tanpa sebarang bayaran tambahan.',
     },
     {
-      q: 'Bilakah yuran pembaharuan tahunan RM10.00 dikenakan?',
-      a: 'Yuran pembaharuan tahun seterusnya (RM10.00) hanya akan dibayar selepas tamat tempoh 1 tahun (365 hari) dari tarikh pendaftaran anda. Tiada caj auto-debit tersembunyi; anda mempunyai kawalan penuh ke atas akaun anda.',
-    },
-    {
       q: 'Adakah saya boleh menerbitkan seberapa banyak buku yang saya mahu?',
       a: 'Ya, 100% UNLIMITED! Anda bebas menerbitkan seberapa banyak judul buku, novel, atau himpunan resepi digital yang anda inginkan tanpa bayaran tambahan bagi setiap naskhah.',
     },
   ];
 
   return (
-    <div className="space-y-12 pb-16">
+    <div className="space-y-10 pb-16">
+      {/* AUTHOR ROYALTY HUB (If Author is Registered) */}
+      {authorProfile?.isSubscribed && (
+        <section className="bg-white border-2 border-emerald-500/80 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#0E7749]">
+                <Wallet className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl sm:text-2xl font-bold font-serif-book text-slate-900">
+                    Papan Pemuka Royalti Penulis
+                  </h2>
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-[#0E7749]">
+                    Akaun Aktif
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500">
+                  {authorProfile.name} • {authorProfile.bankName} ({authorProfile.bankAccountNumber})
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <button
+                onClick={onOpenWriter}
+                className="px-4 py-2 bg-[#0b4d32] hover:bg-[#073623] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+              >
+                <PenSquare className="w-4 h-4" />
+                <span>Tulis Buku Baru</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 4 Stat Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Stat 1: Baki Royalti */}
+            <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">
+                Baki Royalti Boleh Dikeluarkan
+              </span>
+              <div className="text-2xl sm:text-3xl font-black text-[#0b4d32] font-mono">
+                RM {authorProfile.balance.toFixed(2)}
+              </div>
+              <span className="text-[10px] text-emerald-600 block">Kredit sedia dipindahkan ke akaun bank</span>
+            </div>
+
+            {/* Stat 2: Kadar Royalti */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                Kadar Royalti Anda
+              </span>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                95%
+              </div>
+              <span className="text-[10px] text-slate-500 block">Caj platform pengurusan hanya 5%</span>
+            </div>
+
+            {/* Stat 3: Naskhah Terjual */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                Jumlah Buku Terjual
+              </span>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                {stats.totalBooksSold || 2} naskhah
+              </div>
+              <span className="text-[10px] text-slate-500 block">Jualan daripada semua tajuk buku</span>
+            </div>
+
+            {/* Stat 4: Status Yuran */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-1">
+              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                Status Yuran Tahunan
+              </span>
+              <div className="text-base sm:text-lg font-bold text-slate-900">
+                Tahun 1 (RM 20)
+              </div>
+              <span className="text-[10px] text-emerald-700 font-medium block">
+                Pembaharuan tahun depan: RM 10.00 sahaja
+              </span>
+            </div>
+          </div>
+
+          {/* Form Pengeluaran Royalti */}
+          <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <ArrowDownToLine className="w-4 h-4 text-[#0b4d32]" />
+              <h3 className="text-sm font-bold text-slate-900">
+                Permohonan Pengeluaran Royalti ke Bank ({authorProfile.bankName})
+              </h3>
+            </div>
+
+            {withdrawMsg && (
+              <div
+                className={`p-3 rounded-xl text-xs font-medium border ${
+                  withdrawMsg.type === 'error'
+                    ? 'bg-rose-50 border-rose-200 text-rose-800'
+                    : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                }`}
+              >
+                {withdrawMsg.text}
+              </div>
+            )}
+
+            <form onSubmit={handleWithdraw} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="relative flex-1">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-xs text-slate-500">RM</span>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="5"
+                  max={authorProfile.balance}
+                  value={withdrawAmount}
+                  onChange={(e) => setWithdrawAmount(e.target.value)}
+                  placeholder={`Maksimum RM ${authorProfile.balance.toFixed(2)}`}
+                  className="w-full text-xs font-mono pl-11 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:border-[#0E7749]"
+                />
+              </div>
+
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setWithdrawAmount('50')}
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer"
+                >
+                  RM50
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setWithdrawAmount('100')}
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer"
+                >
+                  RM100
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setWithdrawAmount(authorProfile.balance.toFixed(2))}
+                  className="px-2.5 py-2 text-xs font-semibold bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer text-[#0b4d32]"
+                >
+                  Semua
+                </button>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isWithdrawing || authorProfile.balance <= 0}
+                className="px-5 py-2.5 bg-[#0b4d32] hover:bg-[#073623] text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+              >
+                {isWithdrawing ? 'Memproses...' : 'Tarik Tunai Sekarang'}
+              </button>
+            </form>
+          </div>
+        </section>
+      )}
+
       {/* 1. Hero Section */}
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a4a2e] via-[#0E7749] to-[#043d24] text-white p-8 sm:p-12 lg:p-16 shadow-xl border border-emerald-800">
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/20 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/20 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
             <Sparkles className="w-4 h-4 text-emerald-300" />
             <span>Nak Jadi Penulis? • Program Penerbitan Karya Digital</span>
           </div>
@@ -150,7 +337,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
           <div className="flex flex-wrap gap-2.5 pt-2 text-xs font-semibold text-emerald-100">
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              Yuran Tahun 1: RM20
+              Yuran Permulaan: RM20 (Tahun 1)
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -158,11 +345,11 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              Royalti 95% (Caj Platform 5%)
+              Royalti 95% Milik Penulis
             </span>
             <span className="bg-black/20 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              Buku Unlimited
+              Karya Unlimited
             </span>
           </div>
 
@@ -213,8 +400,8 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#0E7749]">Syarat 1</span>
               <h3 className="text-base font-bold text-slate-900">Yuran Permulaan: RM 20 (Tahun Pertama)</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Akses penuh selama 1 tahun untuk membuka studio penulisan, memuat naik manuskrip, menetapkan harga,
-                dan menguruskan jualan buku anda tanpa sebarang caj pendaftaran tersembunyi.
+                Akses penuh selama 1 tahun untuk membuka studio penulisan, memuat naik manuskrip atau fail EPUB/TXT, menetapkan harga,
+                dan menguruskan jualan buku anda tanpa sebarang caj tersembunyi.
               </p>
             </div>
           </div>
@@ -229,7 +416,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
               <h3 className="text-base font-bold text-slate-900">Tahun Seterusnya: RM 10 Sahaja</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Yuran pembaharuan tahunan yang sangat mampu milik. Hanya RM 10 setahun untuk mengekalkan kedai dan
-                semua buku anda sentiasa aktif di pasaran.
+                semua buku anda sentiasa aktif di pasaran pembaca.
               </p>
             </div>
           </div>
@@ -244,7 +431,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
               <h3 className="text-base font-bold text-rose-950">Tidak Boleh Ada Unsur Lucah & Seks</h3>
               <p className="text-xs text-rose-800/90 leading-relaxed">
                 Semua karya mestilah beretika, sopan, dan selamat untuk dibaca. Sebarang bahan lucah, pornografi, atau
-                eksplisit dilarang sama sekali demi memelihara integriti komuniti pembaca.
+                seks dilarang sama sekali demi memelihara integriti komuniti pembaca.
               </p>
             </div>
           </div>
@@ -469,11 +656,10 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
             Daftar Sekarang & Mula Terbitkan Karya Anda
           </h2>
           <p className="text-xs sm:text-sm text-slate-500">
-            Hanya RM 20 untuk tahun pertama. Tiada yuran tersembunyi.
+            Hanya RM 20 untuk tahun pertama (Tahun seterusnya RM 10 sahaja). Tiada yuran tersembunyi.
           </p>
         </div>
 
-        {/* If author is already subscribed, show congratulations and direct action */}
         {authorProfile?.isSubscribed ? (
           <div className="bg-emerald-50 border border-emerald-300 rounded-2xl p-6 sm:p-8 text-center space-y-4 max-w-xl mx-auto">
             <div className="w-16 h-16 bg-[#0E7749] text-white rounded-full flex items-center justify-center mx-auto shadow-md">
@@ -496,13 +682,6 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
               >
                 <PenSquare className="w-4 h-4" />
                 <span>Buka Studio Tulis Buku</span>
-              </button>
-              <button
-                onClick={onOpenAuthorDashboard}
-                className="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-2"
-              >
-                <Wallet className="w-4 h-4" />
-                <span>Papan Pemuka & Royalti</span>
               </button>
             </div>
           </div>
@@ -578,7 +757,7 @@ export const AuthorGuidePage: React.FC<AuthorGuidePageProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Bank Pembayaran Royalti <span className="text-red-500">*</span>
+                  Bank Pembayaran Royalti (95%) <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={bankName}

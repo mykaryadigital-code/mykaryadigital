@@ -202,18 +202,16 @@ function MainAppContent() {
       <TopBar
         currentTab={currentTab}
         onSelectTab={handleSelectTab}
-        onOpenUpload={() => setIsUploadModalOpen(true)}
         onOpenWriter={() => {
           setEditingBookForWriter(null);
           setIsWriterModalOpen(true);
         }}
-        onOpenAuthorPortal={() => setIsAuthorDashboardOpen(true)}
         onOpenAdminPortal={() => setIsAdminDashboardOpen(true)}
         onOpenAuthorRegistration={() => setIsAuthorRegOpen(true)}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-6 space-y-5 sm:space-y-6">
         {currentTab === 'author_guide' ? (
           <AuthorGuidePage
             onOpenWriter={() => {
@@ -233,122 +231,112 @@ function MainAppContent() {
           />
         ) : (
           <>
-            {/* Unified Search, Category Pills, and Status Segmented Controls (Exact matching the reference toolbar) */}
-            <section className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 shadow-xs flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-          {/* 1. Left: Search Input Box */}
-          <div className="relative flex-1 min-w-[260px] max-w-md">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari berdasarkan judul, penulis, sinopsis, atau kod SKU..."
-              className="w-full text-xs sm:text-sm pl-10 pr-4 py-2 bg-slate-50/70 hover:bg-slate-50 focus:bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-red-600 transition-colors"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs p-1"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+            {/* Sedang Dibaca Hero Banner matching reference image */}
+            <div className="w-full bg-[#f4f8f6] border border-[#dce8e2] rounded-3xl p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 overflow-hidden relative shadow-2xs">
+              {/* Left Column: Dark Pine Green Circle Icon + Title + Subtitle */}
+              <div className="flex items-center gap-4 relative z-10">
+                <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#0b4d32] text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <BookOpen className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                <div>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold font-serif-book text-slate-900 tracking-tight">
+                    Sedang Dibaca
+                  </h1>
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
+                    Teruskan perjalanan ilmu anda. Bacaan terbaik, lebih bermakna.
+                  </p>
+                </div>
+              </div>
 
-          {/* 2. Middle: Category Navigation Pills with Icons */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 custom-scrollbar shrink-0">
-            {CATEGORIES_WITH_ICONS.map((cat) => {
-              const Icon = cat.icon;
-              const isSelected = selectedCategory === cat.value;
+              {/* Right Column: Handwritten Quote & Stack of Books with Green Plant */}
+              <div className="flex items-center gap-5 sm:gap-6 self-end md:self-auto relative z-10">
+                <div className="text-right">
+                  <span className="font-serif italic text-sm sm:text-base text-slate-700 font-semibold tracking-wide">
+                    “Buku hari ini, kejayaan esok”
+                  </span>
+                </div>
 
-              return (
-                <button
-                  key={cat.label}
-                  onClick={() => setSelectedCategory(cat.value)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap cursor-pointer transition-all flex items-center gap-1.5 border ${
-                    isSelected
-                      ? 'bg-slate-900 text-white border-slate-900 shadow-2xs'
-                      : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/80 hover:border-slate-300'
-                  }`}
-                >
-                  <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-500'}`} />
-                  <span>{cat.label}</span>
-                </button>
-              );
-            })}
-          </div>
+                {/* Aesthetic Visual of Stacked Books with Pages & Potted Plant */}
+                <div className="relative w-32 h-16 sm:w-38 sm:h-20 shrink-0">
+                  <svg viewBox="0 0 160 90" className="w-full h-full drop-shadow-sm" fill="none">
+                    {/* Shadow underneath */}
+                    <ellipse cx="80" cy="80" rx="70" ry="7" fill="#000000" opacity="0.12" />
 
-          {/* 3. Right: Status Segmented Controls & View Switcher */}
-          <div className="flex items-center gap-2 self-end lg:self-auto shrink-0">
-            <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl text-xs">
-              <button
-                onClick={() => setStatusFilter('all')}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  statusFilter === 'all'
-                    ? 'bg-[#d91424] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Semua ({books.length})
-              </button>
+                    {/* Book 1 (Bottom): Dark Slate Hardcover */}
+                    <rect x="22" y="65" width="108" height="12" rx="2" fill="#1e293b" />
+                    <rect x="25" y="67" width="102" height="8" rx="1" fill="#f8fafc" />
+                    <line x1="28" y1="69" x2="124" y2="69" stroke="#cbd5e1" strokeWidth="0.75" />
+                    <line x1="28" y1="71" x2="124" y2="71" stroke="#cbd5e1" strokeWidth="0.75" />
 
-              <button
-                onClick={() => setStatusFilter('reading')}
-                className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  statusFilter === 'reading'
-                    ? 'bg-[#d91424] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Sedang Dibaca
-              </button>
+                    {/* Book 2 (Middle): Warm Cognac / Terracotta Hardcover */}
+                    <rect x="32" y="52" width="98" height="13" rx="2" fill="#78350f" />
+                    <rect x="35" y="54" width="92" height="9" rx="1" fill="#fef3c7" />
+                    <line x1="38" y1="56" x2="124" y2="56" stroke="#fde68a" strokeWidth="0.75" />
+                    <line x1="38" y1="58" x2="124" y2="58" stroke="#fde68a" strokeWidth="0.75" />
 
-              <button
-                onClick={() => setStatusFilter('completed')}
-                className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  statusFilter === 'completed'
-                    ? 'bg-[#d91424] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Selesai
-              </button>
+                    {/* Book 3 (Top): Forest Green Hardcover with Gold Bookmark Ribbon */}
+                    <rect x="42" y="40" width="88" height="12" rx="2" fill="#064e3b" />
+                    <rect x="45" y="42" width="82" height="8" rx="1" fill="#ecfdf5" />
+                    <path d="M108 40V66L113 62L118 66V40H108Z" fill="#d97706" />
 
-              <button
-                onClick={() => setStatusFilter('favorite')}
-                className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  statusFilter === 'favorite'
-                    ? 'bg-[#d91424] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Favorit
-              </button>
+                    {/* Potted Plant */}
+                    <path d="M125 55L128 75H142L145 55H125Z" fill="#ffffff" stroke="#cbd5e1" strokeWidth="1" />
+                    <ellipse cx="135" cy="55" rx="10" ry="2" fill="#475569" />
+                    {/* Lush leaves */}
+                    <path d="M135 55C130 45 120 44 118 48C123 52 130 52 135 55Z" fill="#15803d" />
+                    <path d="M135 55C140 42 152 42 154 47C148 51 140 52 135 55Z" fill="#16a34a" />
+                    <path d="M135 55C133 38 138 32 142 36C140 43 138 48 135 55Z" fill="#22c55e" />
+                    <path d="M135 55C125 36 128 30 131 34C133 41 134 47 135 55Z" fill="#15803d" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
-            {/* View Mode Toggle Icons */}
-            <div className="flex items-center gap-1 pl-1">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                  viewMode === 'grid' ? 'text-[#d91424]' : 'text-slate-400 hover:text-slate-700'
-                }`}
-                title="Tampilan Grid Kad"
-              >
-                <LayoutGrid className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                  viewMode === 'list' ? 'text-[#d91424]' : 'text-slate-400 hover:text-slate-700'
-                }`}
-                title="Tampilan Senarai"
-              >
-                <ListIcon className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </section>
+            {/* Unified Search & Category Navigation Bar matching reference image */}
+            <section className="bg-white border border-slate-200/90 rounded-2xl p-2.5 sm:p-3 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              {/* Search Input Box */}
+              <div className="relative w-full md:w-80 shrink-0">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari berdasarkan judul, penulis, kategori..."
+                  className="w-full text-xs pl-9 pr-7 py-2.5 bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200 rounded-full focus:outline-none focus:border-[#0E7749] transition-colors"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs p-1"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+
+              {/* Category Navigation Pills with Icons (matching exact order & styling from screenshot) */}
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 custom-scrollbar flex-1">
+                {CATEGORIES_WITH_ICONS.map((cat) => {
+                  const Icon = cat.icon;
+                  const isSelected = selectedCategory === cat.value;
+
+                  return (
+                    <button
+                      key={cat.label}
+                      onClick={() => setSelectedCategory(cat.value)}
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap cursor-pointer transition-all flex items-center gap-1.5 border ${
+                        isSelected
+                          ? 'bg-[#0b4d32] text-white border-[#0b4d32] shadow-2xs font-bold'
+                          : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200/90 hover:border-slate-300'
+                      }`}
+                    >
+                      <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-500'}`} />
+                      <span>{cat.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
 
         {/* Active Shelf banner if filtered */}
         {activeShelfFilter && (

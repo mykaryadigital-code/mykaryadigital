@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { X, Plus, Trash2, BookOpen, Layers, Save, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { X, Plus, Trash2, BookOpen, Layers, Save, Image as ImageIcon, Upload, FileText, CheckCircle2 } from 'lucide-react';
 import { Book, Chapter, BookCategory, CoverTheme } from '../types/book';
 import { BookCover } from './BookCover';
+import { parseEpubFile, parseTextFile } from '../services/epubParser';
 
 interface NovelWriterModalProps {
   isOpen: boolean;
@@ -62,8 +63,47 @@ export const NovelWriterModal: React.FC<NovelWriterModalProps> = ({
     ]
   );
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   if (!isOpen) return null;
+
+  const handleProcessFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    setUploadSuccess(false);
+
+    try {
+      const lower = file.name.toLowerCase();
+      let result: Omit<Book, 'id' | 'dateAdded'>;
+      if (lower.endsWith('.epub')) {
+        result = await parseEpubFile(file);
+      } else {
+        result = await parseTextFile(file);
+      }
+
+      if (result.title) setTitle(result.title);
+      if (result.author) setAuthor(result.author);
+      if (result.description) setDescription(result.description);
+      if (result.category) setCategory(result.category);
+      if (result.coverUrl) setCustomCoverUrl(result.coverUrl);
+      if (result.coverTheme) setCoverVariant(result.coverTheme.variant);
+      if (result.chapters && result.chapters.length > 0) {
+        setChapters(result.chapters);
+        setActiveChapterIndex(0);
+      }
+
+      setIsUploading(false);
+      setUploadSuccess(true);
+      setTimeout(() => setUploadSuccess(false), 3000);
+    } catch (err) {
+      setIsUploading(false);
+      alert('Ralat semasa memproses fail ebook. Sila pastikan fail berformat .epub atau .txt yang sah.');
+    }
+  };
 
   const currentChapter = chapters[activeChapterIndex] || chapters[0];
 
@@ -156,6 +196,23 @@ export const NovelWriterModal: React.FC<NovelWriterModalProps> = ({
           </div>
 
           <div className="flex items-center gap-2">
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleProcessFile}
+              accept=".epub,.txt"
+              className="hidden"
+            />
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-md cursor-pointer transition-colors shadow-2xs"
+              title="Unggah fail EPUB atau TXT sedia ada untuk dimasukkan ke editor"
+            >
+              <Upload className="w-3.5 h-3.5 text-emerald-700" />
+              <span>{isUploading ? 'Memproses...' : uploadSuccess ? 'Berjaya Diunggah!' : 'Unggah Fail Ebook'}</span>
+            </button>
+
             <button
               onClick={handleSave}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-white bg-amber-900 hover:bg-amber-800 rounded-md cursor-pointer transition-colors shadow-xs"
