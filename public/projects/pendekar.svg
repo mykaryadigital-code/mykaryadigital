@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgPendekar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022C22" />
+      <stop offset="60%" stop-color="#064E3B" />
+      <stop offset="100%" stop-color="#021C16" />
+    </linearGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgPendekar)" />
+
+  <!-- Mystical Jungle Mist & Bamboo Canopy -->
+  <g opacity="0.2">
+    <circle cx="200" cy="200" r="180" fill="#34D399" filter="blur(60px)" />
+    <circle cx="650" cy="150" r="160" fill="#10B981" filter="blur(60px)" />
+  </g>
+
+  <!-- Giant Mystical Wavy Keris Blade Graphic on Right -->
+  <g transform="translate(600, 40) rotate(15) scale(0.9)">
+    <!-- Glowing Aura -->
+    <path d="M 60 20 Q 30 100 80 160 Q 30 220 80 280 Q 40 340 70 400 L 90 400 Q 60 340 100 280 Q 50 220 100 160 Q 50 100 80 20 Z" fill="#34D399" opacity="0.3" filter="blur(8px)" />
+    <!-- Wavy Damascene Keris (Luk) Blade -->
+    <path d="M 70 30 Q 40 110 90 170 Q 40 230 90 290 Q 50 350 80 410 L 95 410 Q 65 350 105 290 Q 55 230 105 170 Q 55 110 85 30 Z" fill="url(#bladeGrad)" stroke="#F59E0B" stroke-width="2" />
+    <!-- Pamor patterns -->
+    <path d="M 78 50 Q 55 110 95 170 Q 55 230 95 290" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.5" />
+    <!-- Keris Hilt (Hulu Pekaka) -->
+    <rect x="75" y="410" width="22" height="60" rx="8" fill="#78350F" stroke="#FDE68A" stroke-width="1.5" />
+    <circle cx="86" cy="480" r="14" fill="#B45309" />
+  </g>
+
+  <!-- Left Side: Wuxia / Martial Arts Dossier Card -->
+  <rect x="40" y="40" width="380" height="370" rx="16" fill="#064E3B" fill-opacity="0.9" stroke="#059669" stroke-width="1.5" />
+
+  <!-- Category & Badges -->
+  <g transform="translate(64, 68)">
+    <rect width="180" height="28" rx="8" fill="#047857" />
+    <text x="12" y="19" fill="#D1FAE5" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">FANTASI &amp; PENDEKAR</text>
+  </g>
+
+  <g transform="translate(255, 68)">
+    <rect width="90" height="28" rx="8" fill="#78350F" />
+    <text x="10" y="19" fill="#FEF3C7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">KERIS SAKTI</text>
+  </g>
+
+  <!-- Book Title -->
+  <text x="64" y="145" fill="#FFFFFF" font-family="Georgia, 'Cinzel', serif" font-size="23" font-weight="700">Pendekar Rimba Hitam</text>
+  <text x="64" y="174" fill="#34D399" font-family="Georgia, 'Cinzel', serif" font-size="18" font-weight="600">Rahasia Lembah Racun</text>
+
+  <!-- Author -->
+  <text x="64" y="210" fill="#E2E8F0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="500">Arya Seta (Edisi Digital)</text>
+  <text x="64" y="230" fill="#A7F3D0" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Kisah Silat Nusantara, Tapak Bayang &amp; Racun Kalajengking</text>
+
+  <!-- Excerpt Box -->
+  <rect x="64" y="255" width="332" height="72" rx="8" fill="#022C22" fill-opacity="0.8" stroke="#10B981" stroke-opacity="0.3" />
+  <text x="78" y="280" fill="#E2E8F0" font-family="Georgia, serif" font-style="italic" font-size="11">"Tujuh langkah ke lembah kabut, suara suling maut</text>
+  <text x="78" y="298" fill="#E2E8F0" font-family="Georgia, serif" font-style="italic" font-size="11">bergema menembus dada. Hanya jurus Tapak Angin</text>
+  <text x="78" y="316" fill="#E2E8F0" font-family="Georgia, serif" font-style="italic" font-size="11">yang mampu meredam racun berapi."</text>
+
+  <!-- Bottom Pills -->
+  <g transform="translate(64, 350)">
+    <text x="0" y="18" fill="#6EE7B7" font-family="monospace" font-size="11" font-weight="600">SKU: MYK-PRH-03</text>
+    <text x="140" y="18" fill="#D1FAE5" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">• 4,600 perkataan</text>
+    <rect x="250" y="2" width="70" height="24" rx="6" fill="#F59E0B" />
+    <text x="262" y="18" fill="#000000" font-family="sans-serif" font-size="11" font-weight="800">RM 22.00</text>
+  </g>
+</svg>

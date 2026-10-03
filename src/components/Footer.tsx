@@ -34,11 +34,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenContact }) =>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
             {/* Column 1: Brand Info */}
             <div className="md:col-span-2 space-y-3">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 flex-wrap">
                 <KaryaDigitalLogo size="sm" />
-                <span className="text-sm font-bold text-slate-700 dark:text-slate-300 tracking-tight">
-                  MyKarya Digital
-                </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono-data bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold border border-slate-200/50 dark:border-slate-700/50">
                   v2.4
                 </span>

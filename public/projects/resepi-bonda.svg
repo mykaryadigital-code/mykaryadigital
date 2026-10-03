@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgResepi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#431407" />
+      <stop offset="60%" stop-color="#7C2D12" />
+      <stop offset="100%" stop-color="#1F2937" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgResepi)" />
+
+  <!-- Traditional Culinary Glow & Banana Leaf Silhouettes on Right -->
+  <g opacity="0.3">
+    <ellipse cx="660" cy="200" rx="140" ry="140" fill="#EA580C" filter="blur(60px)" />
+  </g>
+
+  <!-- Traditional Claypot / Rendang Pot Graphic on Right -->
+  <g transform="translate(560, 160)">
+    <!-- Banana Leaf Base -->
+    <ellipse cx="90" cy="190" rx="110" ry="32" fill="#15803D" opacity="0.9" />
+    <path d="M -20 190 Q 90 170 200 190" stroke="#86EFAC" stroke-width="2" fill="none" opacity="0.4" />
+    <!-- Claypot Body -->
+    <ellipse cx="90" cy="140" rx="80" ry="40" fill="#7C2D12" stroke="#EA580C" stroke-width="3" />
+    <ellipse cx="90" cy="120" rx="75" ry="30" fill="#431407" />
+    <!-- Rich Golden Rendang / Gulai Texture -->
+    <ellipse cx="90" cy="122" rx="65" ry="22" fill="#9A3412" />
+    <circle cx="75" cy="120" r="10" fill="#D97706" />
+    <circle cx="105" cy="122" r="12" fill="#B45309" />
+    <circle cx="90" cy="128" r="8" fill="#F59E0B" />
+    <!-- Cili Padi & Serai Garnish -->
+    <path d="M 80 115 Q 90 108 100 118" stroke="#EF4444" stroke-width="3.5" fill="none" stroke-linecap="round" />
+    <path d="M 95 110 L 115 125" stroke="#22C55E" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <!-- Claypot Handles -->
+    <path d="M 10 135 C -5 135, -5 150, 10 150" fill="none" stroke="#EA580C" stroke-width="4" />
+    <path d="M 170 135 C 185 135, 185 150, 170 150" fill="none" stroke="#EA580C" stroke-width="4" />
+    <!-- Rising Aroma Steams -->
+    <path d="M 75 95 Q 65 75 80 55 Q 95 35 85 15" stroke="#FED7AA" stroke-width="2.5" fill="none" opacity="0.4" stroke-linecap="round" />
+    <path d="M 105 95 Q 115 75 100 55 Q 85 35 105 15" stroke="#FED7AA" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Left Side: Recipe Dossier Card -->
+  <rect x="40" y="40" width="380" height="370" rx="16" fill="#1C1917" fill-opacity="0.94" stroke="#9A3412" stroke-width="1.5" />
+
+  <!-- Category & Badges -->
+  <g transform="translate(64, 68)">
+    <rect width="180" height="28" rx="8" fill="#C2410C" />
+    <text x="12" y="19" fill="#FFEDD5" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">RESEPI &amp; KULINARI</text>
+  </g>
+
+  <g transform="translate(255, 68)">
+    <rect width="115" height="28" rx="8" fill="#15803D" />
+    <text x="10" y="19" fill="#DCFCE7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">🥘 ASLI BONDA</text>
+  </g>
+
+  <!-- Book Title -->
+  <text x="64" y="145" fill="#FED7AA" font-family="'Cinzel', Georgia, serif" font-size="23" font-weight="700">Resepi Warisan Bonda</text>
+  <text x="64" y="174" fill="#F97316" font-family="'Cinzel', Georgia, serif" font-size="20" font-weight="700">Sajian Tradisi Melayu</text>
+
+  <!-- Author -->
+  <text x="64" y="210" fill="#E2E8F0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="500">Puan Maryam Khatijah</text>
+  <text x="64" y="230" fill="#CBD5E1" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Rendang Tok, Nasi Kerabu, Sambal Tempoyak &amp; Kuih Tradisi</text>
+
+  <!-- Recipe Highlight Box -->
+  <rect x="64" y="255" width="332" height="72" rx="8" fill="#292524" fill-opacity="0.8" stroke="#78350F" stroke-opacity="0.5" />
+  <text x="78" y="280" fill="#FDBA74" font-family="Georgia, serif" font-style="italic" font-size="11">"Petua turun-temurun mengadun santan pekat dan kerisik</text>
+  <text x="78" y="298" fill="#FDBA74" font-family="Georgia, serif" font-style="italic" font-size="11">hingga pecah minyak sempurna. Lengkap dengan takaran</text>
+  <text x="78" y="316" fill="#FDBA74" font-family="Georgia, serif" font-style="italic" font-size="11">gram matang untuk dapur moden."</text>
+
+  <!-- Bottom Pills -->
+  <g transform="translate(64, 350)">
+    <text x="0" y="18" fill="#FB923C" font-family="monospace" font-size="11" font-weight="600">SKU: MYK-RWB-05</text>
+    <text x="140" y="18" fill="#CBD5E1" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">• 4,100 perkataan</text>
+    <rect x="250" y="2" width="70" height="24" rx="6" fill="#F59E0B" />
+    <text x="262" y="18" fill="#000000" font-family="sans-serif" font-size="11" font-weight="800">RM 19.90</text>
+  </g>
+</svg>

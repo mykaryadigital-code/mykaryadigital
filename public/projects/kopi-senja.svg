@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgKopi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451A03" />
+      <stop offset="60%" stop-color="#78350F" />
+      <stop offset="100%" stop-color="#1C1917" />
+    </linearGradient>
+    <linearGradient id="sunsetGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgKopi)" />
+
+  <!-- Warm Sunset Glow Orb on Right -->
+  <circle cx="640" cy="180" r="160" fill="url(#sunsetGrad)" opacity="0.35" filter="blur(60px)" />
+
+  <!-- Artisan Ceramic Coffee Cup & Steam Graphic on Right -->
+  <g transform="translate(560, 160)">
+    <!-- Saucer -->
+    <ellipse cx="90" cy="180" rx="90" ry="24" fill="#292524" stroke="#78350F" stroke-width="3" />
+    <!-- Cup Body -->
+    <path d="M 30 90 L 50 160 C 50 175, 130 175, 130 160 L 150 90 Z" fill="#44403C" stroke="#FDE68A" stroke-width="2" />
+    <!-- Liquid Coffee Surface -->
+    <ellipse cx="90" cy="90" rx="60" ry="16" fill="#1C1917" />
+    <ellipse cx="90" cy="90" rx="50" ry="12" fill="#78350F" />
+    <path d="M 80 84 Q 90 92 100 84" stroke="#D97706" stroke-width="2" fill="none" opacity="0.8" />
+    <!-- Handle -->
+    <path d="M 140 105 C 175 105, 175 145, 135 145" fill="none" stroke="#FDE68A" stroke-width="5" stroke-linecap="round" />
+    <!-- Swirling Rising Steam -->
+    <path d="M 75 70 Q 65 40 80 20 Q 95 0 85 -20" stroke="#FEF3C7" stroke-width="3" fill="none" opacity="0.4" stroke-linecap="round" />
+    <path d="M 95 70 Q 110 40 95 20 Q 80 0 100 -20" stroke="#FEF3C7" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round" />
+    <path d="M 110 75 Q 120 50 110 30" stroke="#FEF3C7" stroke-width="2" fill="none" opacity="0.3" stroke-linecap="round" />
+  </g>
+
+  <!-- Left Side: Cozy Essay / Journal Dossier Card -->
+  <rect x="40" y="40" width="380" height="370" rx="16" fill="#1C1917" fill-opacity="0.92" stroke="#78350F" stroke-width="1.5" />
+
+  <!-- Category & Badges -->
+  <g transform="translate(64, 68)">
+    <rect width="140" height="28" rx="8" fill="#B45309" />
+    <text x="12" y="19" fill="#FEF3C7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">ESAI &amp; PUISI</text>
+  </g>
+
+  <g transform="translate(215, 68)">
+    <rect width="115" height="28" rx="8" fill="#451A03" stroke="#F59E0B" stroke-opacity="0.4" />
+    <text x="12" y="19" fill="#FDE68A" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">☕ EDISI SENJA</text>
+  </g>
+
+  <!-- Book Title -->
+  <text x="64" y="145" fill="#FEF3C7" font-family="'Cinzel', Georgia, serif" font-size="23" font-weight="700">Secangkir Kopi di</text>
+  <text x="64" y="174" fill="#F59E0B" font-family="'Cinzel', Georgia, serif" font-size="23" font-weight="700">Ujung Senja</text>
+
+  <!-- Author -->
+  <text x="64" y="210" fill="#E2E8F0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="500">Rian Adiputra</text>
+  <text x="64" y="230" fill="#D6D3D1" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Refleksi Ketenangan Hati &amp; Filosofi Rasa Hidup</text>
+
+  <!-- Excerpt Box -->
+  <rect x="64" y="255" width="332" height="72" rx="8" fill="#292524" fill-opacity="0.8" stroke="#57534E" stroke-opacity="0.5" />
+  <text x="78" y="280" fill="#FDE68A" font-family="Georgia, serif" font-style="italic" font-size="11">"Pahitnya kopi mengajarkan kita bahawa tidak semua</text>
+  <text x="78" y="298" fill="#FDE68A" font-family="Georgia, serif" font-style="italic" font-size="11">keindahan bermula dengan kemanisan. Kadang-kadang,</text>
+  <text x="78" y="316" fill="#FDE68A" font-family="Georgia, serif" font-style="italic" font-size="11">keikhlasan itu lahir daripada kepahitan yang disyukuri."</text>
+
+  <!-- Bottom Pills -->
+  <g transform="translate(64, 350)">
+    <text x="0" y="18" fill="#FBBF24" font-family="monospace" font-size="11" font-weight="600">SKU: MYK-SKS-04</text>
+    <text x="140" y="18" fill="#D6D3D1" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">• 3,900 perkataan</text>
+    <rect x="250" y="2" width="70" height="24" rx="6" fill="#10B981" />
+    <text x="262" y="18" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">PERCUMA</text>
+  </g>
+</svg>

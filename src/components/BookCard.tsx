@@ -38,10 +38,12 @@ export const BookCard: React.FC<BookCardProps> = ({
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [copiedToast, setCopiedToast] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { isBookPurchased } = useMarketplace();
 
   const isFree = !book.price || book.price <= 0;
   const purchased = isBookPurchased(book.id) || isFree;
+  const imageSource = !imageError ? (book.imageUrl || book.coverUrl) : null;
 
   const formatPrice = (price?: number, currency: string = 'RM') => {
     if (price === undefined || price === null || price === 0) return 'Percuma';
@@ -114,16 +116,18 @@ export const BookCard: React.FC<BookCardProps> = ({
 
         {/* Bahagian Atas: Imej Pratonton dengan nisbah aspek tetap (aspect-video / 16:9) & zoom halus */}
         <div className="relative w-full aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 select-none">
-          {book.coverUrl ? (
+          {imageSource ? (
             <img
-              src={book.coverUrl}
+              src={imageSource}
               alt={book.title}
-              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              loading="lazy"
+              onError={() => setImageError(true)}
+              className="w-full h-full aspect-video object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
           ) : (
-            /* Modern Generative Project Preview Banner Canvas */
+            /* Modern Generative Project Preview Banner Canvas (Fallback with category icon & gradient) */
             <div
-              className={`w-full h-full bg-gradient-to-br ${getBannerGradient(
+              className={`w-full h-full aspect-video bg-gradient-to-br ${getBannerGradient(
                 book.coverTheme?.variant
               )} p-5 flex flex-col justify-between relative overflow-hidden transition-transform duration-500 ease-out group-hover:scale-105`}
             >

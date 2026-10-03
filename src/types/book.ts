@@ -67,6 +67,7 @@ export interface Book {
   freeChapterCount?: number; // Bilangan bab percuma untuk pembaca (default: 1)
   authorId?: string; // ID penulis pemilik royalti
   coverUrl?: string; // Uploaded custom image (data URL)
+  imageUrl?: string; // Tangkapan skrin sebenar / gambar visual projek
   coverTheme: CoverTheme;
   tags: string[];
   shelf?: string; // Custom shelf name

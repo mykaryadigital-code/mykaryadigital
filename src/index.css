@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
     --font-serif: 'Newsreader', 'Lora', Georgia, serif;
     --font-display: 'Cinzel', Georgia, serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -66,6 +67,10 @@
 
 .font-serif-book {
   font-family: 'Newsreader', 'Lora', Georgia, serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
 }
 
 .font-display-title {

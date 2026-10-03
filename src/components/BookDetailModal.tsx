@@ -88,7 +88,7 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({
                 <BookCover
                   title={book.title}
                   author={book.author}
-                  coverUrl={book.coverUrl}
+                  coverUrl={book.imageUrl || book.coverUrl}
                   coverTheme={book.coverTheme}
                   size="lg"
                 />

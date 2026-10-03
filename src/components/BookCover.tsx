@@ -87,6 +87,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
   size = 'md',
   className = '',
 }) => {
+  const [imageError, setImageError] = React.useState(false);
   // Auto-detect theme based on title if not explicitly set
   let variant = coverTheme.variant;
   if (title.toLowerCase().includes('kopi') || title.toLowerCase().includes('senja')) {
@@ -109,7 +110,7 @@ export const BookCover: React.FC<BookCoverProps> = ({
     xl: 'w-64 h-96 text-base',
   };
 
-  if (coverUrl) {
+  if (coverUrl && !imageError) {
     return (
       <div
         className={`book-spine-effect rounded-r-xl rounded-l-xs overflow-hidden shrink-0 select-none bg-stone-900 ${sizeClasses[size]} ${className}`}
@@ -118,11 +119,10 @@ export const BookCover: React.FC<BookCoverProps> = ({
         <img
           src={coverUrl}
           alt={title}
+          loading="lazy"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover"
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-          }}
+          onError={() => setImageError(true)}
         />
       </div>
     );

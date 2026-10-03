@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgVdw" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E1B4B" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#312E81" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgVdw)" />
+
+  <!-- Moon & Clouds -->
+  <circle cx="680" cy="90" r="45" fill="#FEF08A" opacity="0.85" filter="drop-shadow(0 0 25px rgba(254, 240, 138, 0.4))" />
+  <circle cx="695" cy="80" r="40" fill="#1E1B4B" />
+  <path d="M 600 120 Q 640 100 680 120 Q 720 135 760 115" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="6" fill="none" stroke-linecap="round" />
+
+  <!-- Distant Minang Mountain Ridges (Bukit Barisan) -->
+  <polygon points="0,290 120,210 240,285 360,200 480,270 600,195 720,265 800,220 800,450 0,450" fill="#1E1B4B" opacity="0.6" />
+  <polygon points="0,320 160,250 320,310 460,240 620,315 760,260 800,280 800,450 0,450" fill="#0F172A" opacity="0.8" />
+
+  <!-- Ocean Waves (Teluk Bayur) -->
+  <rect y="310" width="800" height="140" fill="url(#seaGrad)" />
+  <path d="M 0 325 Q 100 315 200 325 T 400 325 T 600 325 T 800 325 L 800 450 L 0 450 Z" fill="#1E293B" opacity="0.5" />
+  <path d="M 0 355 Q 120 345 240 355 T 480 355 T 720 355 T 800 355" stroke="#93C5FD" stroke-opacity="0.25" stroke-width="2" fill="none" />
+  <path d="M 0 395 Q 100 385 200 395 T 400 395 T 600 395 T 800 395" stroke="#93C5FD" stroke-opacity="0.15" stroke-width="1.5" fill="none" />
+
+  <!-- Steamship Silhouette (Kapal Van der Wijck) -->
+  <g transform="translate(480, 240) scale(0.75)">
+    <!-- Ship Hull -->
+    <path d="M 40 80 L 70 120 L 260 120 L 290 90 L 240 80 Z" fill="#020617" />
+    <!-- Cabins & Masts -->
+    <rect x="90" y="60" width="130" height="22" fill="#090D16" rx="2" />
+    <rect x="110" y="44" width="70" height="18" fill="#1E293B" rx="1" />
+    <!-- Funnels with Smoke -->
+    <rect x="130" y="24" width="12" height="22" fill="#991B1B" />
+    <rect x="155" y="24" width="12" height="22" fill="#991B1B" />
+    <!-- Smoke puffs -->
+    <circle cx="132" cy="14" r="8" fill="#E2E8F0" opacity="0.3" />
+    <circle cx="124" cy="5" r="12" fill="#E2E8F0" opacity="0.2" />
+    <circle cx="160" cy="12" r="9" fill="#E2E8F0" opacity="0.35" />
+    <!-- Masts & Rigging -->
+    <line x1="80" y1="20" x2="80" y2="80" stroke="#000000" stroke-width="2" />
+    <line x1="230" y1="20" x2="230" y2="80" stroke="#000000" stroke-width="2" />
+  </g>
+
+  <!-- Left Side: Classical Roman / Literature Dossier Card -->
+  <rect x="40" y="40" width="370" height="370" rx="16" fill="#0F172A" fill-opacity="0.88" stroke="#334155" stroke-width="1.5" />
+  
+  <!-- Category Tag -->
+  <g transform="translate(64, 68)">
+    <rect width="135" height="28" rx="8" fill="#312E81" />
+    <text x="12" y="19" fill="#C7D2FE" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">NOVEL SASTRA</text>
+  </g>
+
+  <g transform="translate(210, 68)">
+    <rect width="105" height="28" rx="8" fill="#065F46" />
+    <text x="12" y="19" fill="#A7F3D0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">⭐ 5.0 (142)</text>
+  </g>
+
+  <!-- Book Title -->
+  <text x="64" y="145" fill="url(#goldText)" font-family="Georgia, 'Cinzel', serif" font-size="24" font-weight="700" letter-spacing="0.5">Tenggelamnya Kapal</text>
+  <text x="64" y="178" fill="url(#goldText)" font-family="Georgia, 'Cinzel', serif" font-size="24" font-weight="700" letter-spacing="0.5">Van der Wijck</text>
+
+  <!-- Author -->
+  <text x="64" y="215" fill="#E2E8F0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600">Buya Hamka (Haji Abdul Malik)</text>
+  <text x="64" y="238" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Karya Klasik Sastra Nusantara • Edisi Digital</text>
+
+  <!-- Excerpt / Quote -->
+  <rect x="64" y="260" width="322" height="68" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-opacity="0.4" />
+  <text x="78" y="285" fill="#CBD5E1" font-family="Georgia, serif" font-style="italic" font-size="11">"Cinta bukan melemahkan hati, bukan membawa putus asa...</text>
+  <text x="78" y="304" fill="#CBD5E1" font-family="Georgia, serif" font-style="italic" font-size="11">tetapi membangkitkan kekuatan dalam jiwa."</text>
+
+  <!-- Bottom Pills -->
+  <g transform="translate(64, 348)">
+    <text x="0" y="18" fill="#38BDF8" font-family="monospace" font-size="11" font-weight="600">SKU: MYK-VDW-01</text>
+    <text x="145" y="18" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">• 4,850 perkataan</text>
+    <rect x="250" y="2" width="70" height="24" rx="6" fill="#F59E0B" />
+    <text x="262" y="18" fill="#000000" font-family="sans-serif" font-size="11" font-weight="800">RM 29.00</text>
+  </g>
+</svg>

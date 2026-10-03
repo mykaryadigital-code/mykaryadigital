@@ -14,6 +14,8 @@ export const INITIAL_BOOKS: Book[] = [
     currency: 'RM',
     sku: 'MYK-VDW-01',
     salesCount: 142,
+    imageUrl: '/projects/vanderwijck.svg',
+    coverUrl: '/projects/vanderwijck.svg',
     coverTheme: {
       variant: 'navy',
       pattern: 'ornate',
@@ -76,6 +78,8 @@ Mereka merantau jauh ke tanah Jawa, menetap di kota Surabaya. Di sana, Zainuddin
     currency: 'RM',
     sku: 'MYK-SH-02',
     salesCount: 89,
+    imageUrl: '/projects/sherlock.svg',
+    coverUrl: '/projects/sherlock.svg',
     coverTheme: {
       variant: 'noir',
       pattern: 'geometric',
@@ -142,6 +146,8 @@ Foto itu ada di sana! Holmes telah menemukan letaknya. Namun, ketika kami kembal
     currency: 'RM',
     sku: 'MYK-PR-03',
     salesCount: 65,
+    imageUrl: '/projects/pendekar.svg',
+    coverUrl: '/projects/pendekar.svg',
     coverTheme: {
       variant: 'emerald',
       pattern: 'classic_border',
@@ -201,6 +207,8 @@ Ia membuka gulungan perkamen itu perlahan. Di dalamnya tertera bait-bait ramalan
     currency: 'RM',
     sku: 'MYK-FAS-04',
     salesCount: 210,
+    imageUrl: '/projects/kopi-senja.svg',
+    coverUrl: '/projects/kopi-senja.svg',
     coverTheme: {
       variant: 'terracotta',
       pattern: 'minimal',
@@ -263,6 +271,8 @@ Setiap buku yang kausimpan adalah sepotong dari dirimu sendiri pada saat kau mem
     currency: 'RM',
     sku: 'MYK-RSP-01',
     salesCount: 310,
+    imageUrl: '/projects/resepi-bonda.svg',
+    coverUrl: '/projects/resepi-bonda.svg',
     coverTheme: {
       variant: 'terracotta',
       pattern: 'ornate',
@@ -354,6 +364,8 @@ Kukus pulut hingga naik wap dan lembut berkilat. Tekan pulut padat-padat di dala
     currency: 'RM',
     sku: 'MYK-PND-01',
     salesCount: 890,
+    imageUrl: '/projects/panduan-penulis.svg',
+    coverUrl: '/projects/panduan-penulis.svg',
     coverTheme: {
       variant: 'emerald',
       pattern: 'classic_border',

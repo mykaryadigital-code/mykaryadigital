@@ -102,17 +102,23 @@ export async function getAllBooks(): Promise<Book[]> {
       const allList = [...rawBooks, ...missingInitial];
 
       const books: Book[] = allList.map((b) => {
+        const match = INITIAL_BOOKS.find((ib) => ib.id === b.id || ib.title === b.title);
+        const updated: Book = {
+          ...b,
+          imageUrl: b.imageUrl || match?.imageUrl,
+          coverUrl: b.coverUrl || match?.coverUrl,
+        };
+
         if (b.price === undefined || b.price === null) {
-          const match = INITIAL_BOOKS.find((ib) => ib.id === b.id || ib.title === b.title);
           return {
-            ...b,
+            ...updated,
             price: match?.price ?? 25.0,
             currency: match?.currency ?? 'RM',
             sku: match?.sku ?? `MYK-${b.id.substring(0, 8).toUpperCase()}`,
             salesCount: match?.salesCount ?? 25,
           };
         }
-        return b;
+        return updated;
       });
       resolve(books);
     };

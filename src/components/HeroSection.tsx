@@ -9,6 +9,10 @@ import {
   X,
   Send,
   MessageCircle,
+  TrendingUp,
+  Lock,
+  Bookmark,
+  Layers,
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -77,72 +81,174 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           />
         </svg>
 
-        <div className="relative z-10 max-w-3xl space-y-5 sm:space-y-6 text-left">
-          {/* Top Value Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ECFDF5] dark:bg-emerald-950/60 border border-[#A7F3D0] dark:border-emerald-800/60 text-[#006B57] dark:text-emerald-400 text-xs font-semibold tracking-wide">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-            <span>Platform Penerbitan & Karya Digital Moden</span>
+        {/* Responsive Desktop Grid: Text on Left (col-7), Interactive UI Graphic on Right (col-5) */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* Left Column: Heading, Subtitle & Actions */}
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
+            {/* Top Value Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ECFDF5] dark:bg-emerald-950/60 border border-[#A7F3D0] dark:border-emerald-800/60 text-[#006B57] dark:text-emerald-400 text-xs font-semibold tracking-wide">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span>Platform Penerbitan & Karya Digital Moden</span>
+            </div>
+
+            {/* H1 Main Heading: Bold, concise, focusing on digital products */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.18]">
+              Perpustakaan & Ekosistem Buku Digital{' '}
+              <span className="bg-gradient-to-r from-[#006B57] via-[#047857] to-emerald-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">
+                Masa Hadapan.
+              </span>
+            </h1>
+
+            {/* Subtitle: 1-2 lines explaining the digital solution */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
+              Akses dan baca naskhah pilihan dengan e-reader pantas di pelayar anda, atau terbitkan karya baharu tanpa had dengan agihan{' '}
+              <strong className="text-slate-900 dark:text-white font-semibold">95% royalti bersih</strong> untuk penulis tempatan.
+            </p>
+
+            {/* 2 Call-to-Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
+              {/* Butang Primer */}
+              <button
+                onClick={onExploreProjects}
+                className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 rounded-[12px] bg-[#006B57] hover:bg-[#063F35] dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006B57] dark:focus-visible:ring-emerald-400"
+              >
+                <BookOpen className="w-4 h-4 text-emerald-100 dark:text-emerald-950" />
+                <span>Lihat Projek Digital</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              {/* Butang Sekunder */}
+              <button
+                onClick={handleContactClick}
+                className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 rounded-[12px] border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-xs sm:text-sm transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006B57] dark:focus-visible:ring-emerald-400"
+              >
+                <Mail className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                <span>Hubungi Kami</span>
+              </button>
+
+              {/* Quick link to Author Guide */}
+              <button
+                onClick={onOpenAuthorGuide}
+                className="text-xs font-semibold text-[#006B57] dark:text-emerald-400 hover:underline px-2 py-2 cursor-pointer hidden md:inline-flex items-center gap-1 active:scale-95"
+              >
+                <span>Program Penulis (RM20)</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+
+            {/* Minimal Trust Features Row */}
+            <div className="pt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400">
+              <span className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
+                <span>95% Royalti Milik Penulis</span>
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
+                <span>Penerbitan Fail EPUB & TXT</span>
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
+                <span>Bebas Iklan & Responsif</span>
+              </span>
+            </div>
           </div>
 
-          {/* H1 Main Heading: Bold, concise, focusing on digital products */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.18]">
-            Perpustakaan & Ekosistem Buku Digital{' '}
-            <span className="bg-gradient-to-r from-[#006B57] via-[#047857] to-emerald-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">
-              Masa Hadapan.
-            </span>
-          </h1>
+          {/* Right Column: Interactive Digital Product Mockup UI (Desktop) */}
+          <div className="lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative">
+            {/* Ambient Background Glow behind device */}
+            <div className="absolute inset-0 bg-emerald-500/10 dark:bg-emerald-400/10 rounded-full blur-2xl transform scale-90 pointer-events-none" />
 
-          {/* Subtitle: 1-2 lines explaining the digital solution */}
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 font-normal leading-relaxed max-w-2xl">
-            Akses dan baca naskhah pilihan dengan e-reader pantas di pelayar anda, atau terbitkan karya baharu tanpa had dengan agihan{' '}
-            <strong className="text-slate-900 dark:text-white font-semibold">95% royalti bersih</strong> untuk penulis.
-          </p>
-
-          {/* 2 Call-to-Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
-            {/* Butang Primer: High contrast with subtle hover effect */}
-            <button
+            {/* Main Interactive Tablet / Browser Mockup Card */}
+            <div
               onClick={onExploreProjects}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 rounded-[12px] bg-[#006B57] hover:bg-[#063F35] dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              className="relative w-full max-w-[390px] rounded-2xl border border-slate-200/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 shadow-[0_20px_50px_rgba(0,107,87,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-md overflow-hidden select-none cursor-pointer transform hover:-translate-y-1.5 transition-all duration-300 group"
+              title="Ketik untuk melihat naskhah secara langsung"
             >
-              <BookOpen className="w-4 h-4 text-emerald-100 dark:text-emerald-950" />
-              <span>Lihat Projek Digital</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              {/* Window Title Bar with Traffic Dots */}
+              <div className="h-9 px-4 bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200/70 dark:border-slate-700/70 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                </div>
+                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-white dark:bg-slate-900 text-[10px] text-slate-500 dark:text-slate-400 font-mono-data border border-slate-200/60 dark:border-slate-700/60">
+                  <Lock className="w-2.5 h-2.5 text-emerald-500" />
+                  <span>karyadigital.com/reader</span>
+                </div>
+                <div className="w-8" />
+              </div>
 
-            {/* Butang Sekunder: Outline / Ghost Button */}
-            <button
-              onClick={handleContactClick}
-              className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 rounded-[12px] border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-xs sm:text-sm transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-2xs"
-            >
-              <Mail className="w-4 h-4 text-slate-500 dark:text-slate-400" />
-              <span>Hubungi Kami</span>
-            </button>
+              {/* Reader Interface Body Simulation */}
+              <div className="p-5 space-y-4 text-left">
+                {/* Book Header Bar in Mockup */}
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                  <div>
+                    <span className="text-[10px] font-mono-data uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold">
+                      SEDANG DIBACA • BAB I
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">
+                      Tenggelamnya Kapal Van der Wijck
+                    </h4>
+                  </div>
+                  <div className="p-1 rounded-md bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
+                    <Bookmark className="w-3.5 h-3.5 fill-current" />
+                  </div>
+                </div>
 
-            {/* Optional quick link to Author Guide */}
-            <button
-              onClick={onOpenAuthorGuide}
-              className="text-xs font-semibold text-[#006B57] dark:text-emerald-400 hover:underline px-2 py-2 cursor-pointer hidden md:inline-flex items-center gap-1"
-            >
-              <span>Program Penulis (RM20)</span>
-              <span>&rarr;</span>
-            </button>
-          </div>
+                {/* Simulated Editorial Reader Paragraph */}
+                <div className="text-xs leading-relaxed text-slate-700 dark:text-slate-300 font-serif-book space-y-2">
+                  <p>
+                    <span className="float-left text-2xl font-bold font-serif-book text-[#006B57] dark:text-emerald-400 pr-1.5 leading-none">
+                      K
+                    </span>
+                    etika kapal api yang membawanya dari pelabuhan Makassar mulai merapat di Teluk Bayur, hati Zainuddin berdebar kencang laksana ombak memecah di karang Pantai Padang...
+                  </p>
+                </div>
 
-          {/* Minimal Trust Features Row */}
-          <div className="pt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400">
-            <span className="flex items-center gap-1.5 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
-              <span>95% Royalti Milik Penulis</span>
-            </span>
-            <span className="flex items-center gap-1.5 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
-              <span>Penerbitan Fail EPUB & TXT</span>
-            </span>
-            <span className="flex items-center gap-1.5 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
-              <span>Bebas Iklan & Responsif</span>
-            </span>
+                {/* Reading Progress Indicator */}
+                <div className="space-y-1.5 pt-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono-data text-slate-500 dark:text-slate-400">
+                    <span>Kemajuan Bacaan</span>
+                    <span className="font-semibold text-[#006B57] dark:text-emerald-400">42% Selesai</span>
+                  </div>
+                  <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#006B57] to-emerald-400 rounded-full w-[42%]" />
+                  </div>
+                </div>
+
+                {/* Reader Toolbar Simulation */}
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-500 dark:text-slate-400">
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Aa Teks</span>
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">🌙 Mod Gelap</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                    <span>Buka Reader</span>
+                    <span>&rarr;</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Metric Badge 1 (Top Right Offset) */}
+            <div className="absolute -top-4 -right-3 bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/80 rounded-xl p-2.5 shadow-lg flex items-center gap-2.5 backdrop-blur-md animate-in fade-in duration-300">
+              <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-[#006B57] dark:text-emerald-400 flex items-center justify-center shrink-0">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+              <div className="text-left leading-tight">
+                <div className="text-[11px] font-bold text-slate-900 dark:text-white">95% Royalti</div>
+                <div className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">Agihan Bersih Penulis</div>
+              </div>
+            </div>
+
+            {/* Floating Metric Badge 2 (Bottom Left Offset) */}
+            <div className="absolute -bottom-3 -left-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 shadow-lg flex items-center gap-2.5 backdrop-blur-md animate-in fade-in duration-300">
+              <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div className="text-left leading-tight">
+                <div className="text-[11px] font-bold text-slate-900 dark:text-white">IndexedDB Ready</div>
+                <div className="text-[9px] text-slate-500 dark:text-slate-400 font-medium">Sandaran Luar Talian</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -206,28 +312,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     Mesej Anda
                   </label>
                   <textarea
-                    rows={3}
                     value={contactMessage}
                     onChange={(e) => setContactMessage(e.target.value)}
-                    placeholder="Tuliskan pertanyaan mengenai naskhah atau penerbitan buku anda..."
+                    rows={4}
+                    placeholder="Tuliskan soalan atau hasrat kerjasama anda di sini..."
+                    required
                     className="w-full p-2.5 rounded-[10px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#006B57] dark:focus:border-emerald-400 resize-none"
                   />
                 </div>
 
-                <div className="flex items-center gap-2 pt-1">
-                  <button
-                    type="submit"
-                    className="flex-1 flex items-center justify-center gap-2 h-10 bg-[#006B57] hover:bg-[#063F35] dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white font-semibold rounded-[12px] transition-colors cursor-pointer"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Hantar Emel</span>
-                  </button>
+                <div className="pt-2 flex items-center justify-end gap-2">
                   <button
                     type="button"
                     onClick={() => setIsContactModalOpen(false)}
-                    className="px-4 h-10 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-[12px] font-medium transition-colors cursor-pointer"
+                    className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition-colors cursor-pointer"
                   >
                     Batal
+                  </button>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#006B57] hover:bg-[#063F35] text-white font-semibold shadow-xs transition-colors cursor-pointer"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>Hantar Emel</span>
                   </button>
                 </div>
               </form>
