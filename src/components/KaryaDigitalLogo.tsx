@@ -118,14 +118,14 @@ export const KaryaDigitalLogo: React.FC<KaryaDigitalLogoProps> = ({
         /* Native High-Resolution Horizontal Vector Brand Lockup */
         <div className={`flex items-center ${config.gap}`}>
           {/* Official KD Monogram Vector */}
-          <div className={`${config.monogramSize} shrink-0 drop-shadow-2xs flex items-center justify-center`}>
+          <div className={`${config.monogramSize} shrink-0 drop-shadow-2xs flex items-center justify-center text-[#006B57] dark:text-emerald-400`}>
             <svg
               viewBox="100 95 745 460"
               className="w-full h-full"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g fill="#006B57">
+              <g fill="currentColor">
                 {/* Letter K Left Vertical Column with Bracketed Serifs */}
                 <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />
 
@@ -152,14 +152,14 @@ export const KaryaDigitalLogo: React.FC<KaryaDigitalLogoProps> = ({
           {/* Typography Lockup: Karya Digital + Berkarya Tanpa Sempadan */}
           <div className="flex flex-col justify-center text-left leading-none">
             <span
-              className={`font-serif-book font-black ${config.titleSize} text-[#006B57] tracking-tight leading-tight`}
+              className={`font-serif-book font-black ${config.titleSize} text-[#006B57] dark:text-emerald-400 tracking-tight leading-tight`}
               style={{ fontFamily: "'Playfair Display', 'Newsreader', 'Lora', Georgia, serif" }}
             >
               Karya Digital
             </span>
             {config.tagline && (
               <span
-                className={`font-serif-book ${config.taglineSize} text-[#006B57]/80 font-medium tracking-wide mt-0.5 leading-none`}
+                className={`font-serif-book ${config.taglineSize} text-[#006B57]/80 dark:text-emerald-300/80 font-medium tracking-wide mt-0.5 leading-none`}
                 style={{ fontFamily: "'Lora', 'Newsreader', Georgia, serif" }}
               >
                 Berkarya Tanpa Sempadan

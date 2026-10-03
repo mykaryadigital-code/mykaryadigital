@@ -21,6 +21,13 @@ import { AdminDashboardModal } from './components/AdminDashboardModal';
 import { AuthorGuidePage } from './components/AuthorGuidePage';
 import { BookCardSkeleton } from './components/BookCardSkeleton';
 import { EmptyLibraryState } from './components/EmptyLibraryState';
+import { HeroSection } from './components/HeroSection';
+import { ProjectFilterBar } from './components/ProjectFilterBar';
+import { MobileBottomNav } from './components/MobileBottomNav';
+import { ContactModal } from './components/ContactModal';
+import { ProjectGridSkeleton } from './components/SkeletonLoader';
+import { ContactCtaSection } from './components/ContactCtaSection';
+import { Footer } from './components/Footer';
 import {
   BookOpen,
   FolderHeart,
@@ -55,6 +62,38 @@ function MainAppContent() {
   const [isAuthorRegOpen, setIsAuthorRegOpen] = useState(false);
   const [isAuthorDashboardOpen, setIsAuthorDashboardOpen] = useState(false);
   const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  // Dark mode state with persistent localStorage
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    try {
+      const savedTheme = localStorage.getItem('karya_digital_theme');
+      if (savedTheme) {
+        return savedTheme === 'dark';
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('karya_digital_theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('karya_digital_theme', 'light');
+      }
+    } catch {
+      // Ignore
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
 
   // Load initial data
   const loadData = async () => {
@@ -100,6 +139,65 @@ function MainAppContent() {
     return counts;
   }, [books]);
 
+  // Project Category Counts for the Pills Filter Bar
+  const projectCategoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {
+      'Semua': books.length,
+      'Aplikasi Web': 0,
+      'Bisnes & E-Dagang': 0,
+      'Sistem & Automasi': 0,
+      'Novel & Sastera': 0,
+    };
+
+    books.forEach((book) => {
+      const bCat = (book.category || '').toLowerCase();
+      const bTags = (book.tags || []).map((t) => t.toLowerCase());
+
+      if (
+        bCat === 'aplikasi web' ||
+        bCat.includes('aplikasi') ||
+        bCat.includes('panduan') ||
+        bTags.some((t) => t.includes('web') || t.includes('aplikasi') || t.includes('e-reader'))
+      ) {
+        counts['Aplikasi Web']++;
+      }
+
+      if (
+        bCat === 'bisnes & e-dagang' ||
+        bCat.includes('bisnes') ||
+        bCat.includes('dagang') ||
+        bCat.includes('resepi') ||
+        bCat.includes('non-fik') ||
+        bTags.some((t) => t.includes('bisnes') || t.includes('royalti') || t.includes('kulinari') || t.includes('tips'))
+      ) {
+        counts['Bisnes & E-Dagang']++;
+      }
+
+      if (
+        bCat === 'sistem & automasi' ||
+        bCat.includes('sistem') ||
+        bCat.includes('automasi') ||
+        bCat.includes('misteri') ||
+        bCat.includes('fantasi') ||
+        bTags.some((t) => t.includes('sistem') || t.includes('automasi') || t.includes('detektif') || t.includes('silat'))
+      ) {
+        counts['Sistem & Automasi']++;
+      }
+
+      if (
+        bCat.includes('novel') ||
+        bCat.includes('sastra') ||
+        bCat.includes('sastera') ||
+        bCat.includes('puisi') ||
+        bTags.some((t) => t.includes('sastra') || t.includes('klasik') || t.includes('novel'))
+      ) {
+        counts['Novel & Sastera']++;
+      }
+    });
+
+    return counts;
+  }, [books]);
+
   // Reading books count
   const readingBooksCount = useMemo(() => {
     return books.filter((b) => b.status === 'reading').length;
@@ -131,15 +229,51 @@ function MainAppContent() {
         return false;
       }
 
-      // Category filter (resilient matching for Malaysian labels)
+      // Category filter (resilient matching for Malaysian labels & project categories)
       if (selectedCategory !== 'Semua') {
-        const isMatch =
-          book.category === selectedCategory ||
-          (selectedCategory === 'Novel' && book.category.includes('Novel')) ||
-          (selectedCategory === 'Novel Sastra' && book.category.includes('Novel')) ||
-          (selectedCategory.includes('Fantasi') && book.category.includes('Fantasi')) ||
-          (selectedCategory.includes('Non-Fik') && (book.category.includes('Non-Fiksyen') || book.category.includes('Non-Fiksi'))) ||
-          (selectedCategory.includes('Puisi') && (book.category.includes('Puisi') || book.category.includes('Sastra')));
+        const bCat = (book.category || '').toLowerCase();
+        const bTags = (book.tags || []).map((t) => t.toLowerCase());
+
+        let isMatch = false;
+
+        if (selectedCategory === 'Aplikasi Web') {
+          isMatch =
+            bCat === 'aplikasi web' ||
+            bCat.includes('aplikasi') ||
+            bCat.includes('panduan') ||
+            bTags.some((t) => t.includes('web') || t.includes('aplikasi') || t.includes('e-reader'));
+        } else if (selectedCategory === 'Bisnes & E-Dagang') {
+          isMatch =
+            bCat === 'bisnes & e-dagang' ||
+            bCat.includes('bisnes') ||
+            bCat.includes('dagang') ||
+            bCat.includes('resepi') ||
+            bCat.includes('non-fik') ||
+            bTags.some((t) => t.includes('bisnes') || t.includes('royalti') || t.includes('kulinari') || t.includes('tips'));
+        } else if (selectedCategory === 'Sistem & Automasi') {
+          isMatch =
+            bCat === 'sistem & automasi' ||
+            bCat.includes('sistem') ||
+            bCat.includes('automasi') ||
+            bCat.includes('misteri') ||
+            bCat.includes('fantasi') ||
+            bTags.some((t) => t.includes('sistem') || t.includes('automasi') || t.includes('detektif') || t.includes('silat'));
+        } else if (selectedCategory === 'Novel & Sastera') {
+          isMatch =
+            bCat.includes('novel') ||
+            bCat.includes('sastra') ||
+            bCat.includes('sastera') ||
+            bCat.includes('puisi') ||
+            bTags.some((t) => t.includes('sastra') || t.includes('klasik') || t.includes('novel'));
+        } else {
+          isMatch =
+            book.category === selectedCategory ||
+            (selectedCategory === 'Novel' && book.category.includes('Novel')) ||
+            (selectedCategory === 'Novel Sastra' && book.category.includes('Novel')) ||
+            (selectedCategory.includes('Fantasi') && book.category.includes('Fantasi')) ||
+            (selectedCategory.includes('Non-Fik') && (book.category.includes('Non-Fiksyen') || book.category.includes('Non-Fiksi'))) ||
+            (selectedCategory.includes('Puisi') && (book.category.includes('Puisi') || book.category.includes('Sastra')));
+        }
 
         if (!isMatch) return false;
       }
@@ -218,8 +352,8 @@ function MainAppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F9F8] text-[#102A27] flex flex-col font-sans antialiased">
-      {/* Streamlined Top Bar (Clean 3-zone, no button congestion) */}
+    <div className="min-h-screen bg-[#F7F9F8] dark:bg-[#0A0F0E] text-[#102A27] dark:text-[#F1F5F9] flex flex-col font-sans antialiased transition-colors duration-200">
+      {/* Streamlined Top Bar (Sticky, backdrop-blur, clean navigation and Dark/Light toggle) */}
       <TopBar
         isSidebarOpen={isSidebarOpen}
         onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
@@ -230,12 +364,16 @@ function MainAppContent() {
           setIsWriterModalOpen(true);
         }}
         onOpenAuthorPortal={() => setIsAuthorDashboardOpen(true)}
-        onOpenAuthorRegistration={() => setIsAuthorRegOpen(true)}
+        onOpenAuthorRegistration={() => handleSelectTab('author_guide')}
         onOpenProfile={() => handleSelectTab('author_guide')}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={toggleDarkMode}
+        currentTab={currentTab}
+        onSelectTab={handleSelectTab}
       />
 
       {/* Main App Layout: Sidebar on Left + Content Area on Right */}
-      <div className="flex-1 max-w-[1400px] w-full mx-auto flex items-start">
+      <div className="flex-1 max-w-[1440px] w-full mx-auto flex items-start">
         {/* Sidebar housing Menu Utama, Kategori Buku, Royalti, Admin, and Tulis Buku */}
         <Sidebar
           isOpen={isSidebarOpen}
@@ -256,7 +394,7 @@ function MainAppContent() {
         />
 
         {/* Main Content Area */}
-        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
+        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-8 overflow-x-hidden max-w-full">
           {currentTab === 'author_guide' ? (
             <AuthorGuidePage
               onOpenWriter={() => {
@@ -276,62 +414,50 @@ function MainAppContent() {
             />
           ) : (
             <>
-              {/* Hero Section: Sedang Dibaca (Height ~160px, soft green tint, subtle visual) */}
-              <section className="w-full min-h-[160px] bg-gradient-to-br from-[#F0FDF4]/90 via-[#F7FDF9] to-[#ECFDF5]/80 border border-[#E2E8F0] rounded-[18px] p-6 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-[0_4px_20px_rgba(15,23,42,0.03)] relative overflow-hidden">
-                {/* Decorative Subtle Bookshelf / Editorial SVG Watermark */}
-                <svg
-                  className="absolute right-0 bottom-0 top-0 h-full w-auto text-[#006B57] opacity-[0.045] pointer-events-none select-none"
-                  viewBox="0 0 400 160"
-                  fill="none"
-                  preserveAspectRatio="xMaxYMid meet"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M20 140H380" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M50 40V140M60 30V140M75 50V140M85 35V140M105 25V140M115 45V140M135 30V140M150 40V140M165 20V140M180 50V140M200 35V140M215 30V140M230 45V140M250 20V140M265 40V140M285 35V140M300 25V140M320 45V140M335 30V140M350 40V140" stroke="currentColor" strokeWidth="10" strokeLinecap="round" opacity="0.7" />
-                </svg>
+              {/* Modern Minimal Hero Section */}
+              <HeroSection
+                onExploreProjects={() => {
+                  handleSelectTab('all');
+                  const el = document.getElementById('koleksi-buku-grid');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                onOpenAuthorGuide={() => handleSelectTab('author_guide')}
+                onOpenContact={() => setIsContactModalOpen(true)}
+                currentTab={currentTab}
+                totalBooks={books.length}
+              />
 
-                {/* Left Column: Icon + Title + Subtitle */}
-                <div className="flex items-center gap-4 relative z-10">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#006B57] text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-100" />
-                  </div>
-                  <div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#006B57]">
-                      Perpustakaan Digital
-                    </span>
-                    <h1 className="text-2xl sm:text-[28px] font-bold text-[#102A27] tracking-tight leading-snug">
-                      {currentTab === 'reading' ? 'SEDANG DIBACA' : 'KOLEKSI BUKU'}
-                    </h1>
-                    <p className="text-xs sm:text-sm text-[#64748B] font-medium mt-0.5">
-                      Teruskan perjalanan ilmu anda. Bacaan terbaik, lebih bermakna.
-                    </p>
-                  </div>
-                </div>
+              {/* Category Filter Bar (Pills/Tabs) - Mobile-First Horizontal Scroll */}
+              <ProjectFilterBar
+                categories={['Semua', 'Aplikasi Web', 'Bisnes & E-Dagang', 'Sistem & Automasi', 'Novel & Sastera']}
+                selectedCategory={selectedCategory}
+                onSelectCategory={(cat) => {
+                  setSelectedCategory(cat);
+                  if (currentTab !== 'all') {
+                    setCurrentTab('all');
+                  }
+                }}
+                categoryCounts={projectCategoryCounts}
+                totalCount={books.length}
+              />
 
-                {/* Right Column: Editorial Quote */}
-                <div className="text-right hidden sm:block relative z-10 border-l border-emerald-900/10 pl-6">
-                  <span className="font-serif-book italic text-sm sm:text-base text-[#102A27]/85 font-medium tracking-wide block">
-                    “Buku hari ini, kejayaan esok”
-                  </span>
-                  <p className="text-[11px] text-[#64748B] font-medium mt-0.5">Koleksi Terpilih Karya Digital</p>
-                </div>
-              </section>
-
-              {/* Active Filter Bar (Clean indicator when searching, category selected, or shelf active) */}
-              {(selectedCategory !== 'Semua' || searchQuery || activeShelfFilter) && (
-                <div className="bg-white border border-[#E2E8F0] rounded-[14px] px-4 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-wrap items-center justify-between gap-3 text-xs">
+              {/* Active Search & Shelf Indicator Bar */}
+              {(searchQuery || activeShelfFilter) && (
+                <div className="bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 rounded-[14px] px-4 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-wrap items-center justify-between gap-3 text-xs">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[#64748B] font-medium flex items-center gap-1.5">
-                      <Filter className="w-3.5 h-3.5 text-[#006B57]" />
+                    <span className="text-[#64748B] dark:text-slate-400 font-medium flex items-center gap-1.5">
+                      <Filter className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
                       Menapis mengikut:
                     </span>
 
                     {selectedCategory !== 'Semua' && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#006B57] font-semibold border border-[#A7F3D0]">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] dark:bg-emerald-950/60 text-[#006B57] dark:text-emerald-400 font-semibold border border-[#A7F3D0] dark:border-emerald-800">
                         <span>Kategori: {selectedCategory}</span>
                         <button
                           onClick={() => setSelectedCategory('Semua')}
-                          className="hover:text-emerald-900 cursor-pointer text-xs"
+                          className="hover:text-emerald-900 dark:hover:text-emerald-200 cursor-pointer text-xs"
                           title="Buang penapis kategori"
                         >
                           ✕
@@ -340,7 +466,7 @@ function MainAppContent() {
                     )}
 
                     {searchQuery && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-[#102A27] font-semibold border border-slate-200">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[#102A27] dark:text-slate-200 font-semibold border border-slate-200 dark:border-slate-700">
                         <span>Carian: "{searchQuery}"</span>
                         <button
                           onClick={() => setSearchQuery('')}
@@ -353,8 +479,8 @@ function MainAppContent() {
                     )}
 
                     {activeShelfFilter && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 font-semibold border border-amber-200">
-                        <FolderHeart className="w-3 h-3 text-amber-700" />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 font-semibold border border-amber-200 dark:border-amber-800">
+                        <FolderHeart className="w-3 h-3 text-amber-700 dark:text-amber-400" />
                         <span>Rak: {activeShelfFilter}</span>
                         <button
                           onClick={() => setActiveShelfFilter(null)}
@@ -373,7 +499,7 @@ function MainAppContent() {
                       setSearchQuery('');
                       setActiveShelfFilter(null);
                     }}
-                    className="text-[#006B57] font-semibold hover:underline cursor-pointer"
+                    className="text-[#006B57] dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
                   >
                     Set Semula Semua
                   </button>
@@ -382,10 +508,7 @@ function MainAppContent() {
 
               {/* Books Display: Skeleton Loading, Empty State, or Grid */}
               {isLoading ? (
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
-                  <BookCardSkeleton />
-                  <BookCardSkeleton />
-                </div>
+                <ProjectGridSkeleton count={6} />
               ) : filteredBooks.length === 0 ? (
                 <EmptyLibraryState
                   isFiltered={Boolean(searchQuery || selectedCategory !== 'Semua' || activeShelfFilter)}
@@ -401,8 +524,8 @@ function MainAppContent() {
                   }}
                 />
               ) : (
-                /* 2-Column Desktop Grid Layout (Spacious, 24-32px gap) */
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+                /* Responsive Grid: 1 column (mobile), 2 columns (tablet), 3 columns (desktop) with gap-6 / gap-8 */
+                <div id="koleksi-buku-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 scroll-mt-24">
                   {filteredBooks.map((book) => (
                     <BookCard
                       key={book.id}
@@ -420,8 +543,17 @@ function MainAppContent() {
                   ))}
                 </div>
               )}
+
+              {/* Seksyen Hubungi & Kolaborasi Projek Digital */}
+              <ContactCtaSection onOpenContactModal={() => setIsContactModalOpen(true)} />
             </>
           )}
+
+          {/* Seksyen Footer Profesional */}
+          <Footer
+            onSelectTab={handleSelectTab}
+            onOpenContact={() => setIsContactModalOpen(true)}
+          />
         </main>
       </div>
 
@@ -513,6 +645,19 @@ function MainAppContent() {
       <AdminDashboardModal
         isOpen={isAdminDashboardOpen}
         onClose={() => setIsAdminDashboardOpen(false)}
+      />
+
+      {/* Mobile Bottom Navigation (Fixed bottom-0 for md:hidden screens) */}
+      <MobileBottomNav
+        currentTab={currentTab}
+        onSelectTab={handleSelectTab}
+        onOpenContact={() => setIsContactModalOpen(true)}
+      />
+
+      {/* Global Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );

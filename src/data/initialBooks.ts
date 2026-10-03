@@ -418,5 +418,86 @@ Kelebihan Menjual di Karya Digital:
 - Pantau jualan dan mohon pengeluaran tunai pada bila-bila masa terus ke akaun bank anda.`
       }
     ]
+  },
+  {
+    id: 'proj-karya-ereader',
+    title: 'Platform Web E-Reader & Pustaka Digital',
+    author: 'Karya Digital Engineering Team',
+    description: 'Aplikasi web interaktif moden dengan sokongan mod gelap, sistem penanda buku, penyesuaian saiz tipografi dan enjin pemapar EPUB responsif tanpa kebergantungan internet.',
+    category: 'Aplikasi Web',
+    status: 'reading',
+    isFavorite: true,
+    rating: 5,
+    price: 0,
+    currency: 'RM',
+    sku: 'MYK-APP-WEB',
+    salesCount: 1250,
+    coverTheme: {
+      variant: 'emerald',
+      pattern: 'geometric',
+    },
+    tags: ['Aplikasi Web', 'E-Reader', 'Tailwind CSS', 'Vite', 'React SPA'],
+    totalWords: 3200,
+    estimatedReadTimeMinutes: 16,
+    dateAdded: '2026-09-15T08:00:00.000Z',
+    lastReadDate: '2026-10-02T14:30:00.000Z',
+    currentProgress: 60,
+    currentChapterIndex: 0,
+    fileType: 'custom',
+    freeChapterCount: 99,
+    chapters: [
+      {
+        id: 'ereader-ch-1',
+        title: 'Bab 1: Seni Bina Aplikasi Web & Pustaka Digital',
+        wordCount: 1500,
+        content: `Aplikasi web Karya Digital dibina berasaskan React moden, Vite, dan Tailwind CSS. Matlamat utama rekaan adalah membolehkan pembaca membaca buku dan naskhah digital dengan kelajuan tinggi, tipografi yang selesa pada mata (Playfair Display & Newsreader), serta keupayaan simpanan luar talian melalui IndexedDB.
+
+Ciri Utama:
+- Antaramuka minimalis dan responsif untuk mudah alih dan komputer.
+- Mod Cerah & Mod Gelap pintar dengan penyesuaian kontras automatik.
+- Enjin penanda muka surat (bookmark) dan rak kustom peribadi.
+- Sokongan muat turun dan simpanan sandaran JSON/EPUB secara terus.`
+      }
+    ]
+  },
+  {
+    id: 'proj-royalti-automasi',
+    title: 'Sistem Agihan Royalti 95% & Automasi EPUB',
+    author: 'Sistem Kewangan & Penerbitan KD',
+    description: 'Sistem automasi pintar pemprosesan manuskrip teks ke format EPUB digital, kalkulator royalti 95% masa nyata, dan papan pemuka analitik jualan penulis digital.',
+    category: 'Sistem & Automasi',
+    status: 'completed',
+    isFavorite: true,
+    rating: 5,
+    price: 39.0,
+    currency: 'RM',
+    sku: 'MYK-SYS-AUT',
+    salesCount: 460,
+    coverTheme: {
+      variant: 'navy',
+      pattern: 'geometric',
+    },
+    tags: ['Sistem & Automasi', 'Bisnes & E-Dagang', 'Fintech', 'Royalti 95%', 'Automasi'],
+    totalWords: 2800,
+    estimatedReadTimeMinutes: 14,
+    dateAdded: '2026-09-18T09:00:00.000Z',
+    lastReadDate: '2026-10-01T11:00:00.000Z',
+    currentProgress: 100,
+    currentChapterIndex: 0,
+    fileType: 'custom',
+    freeChapterCount: 1,
+    chapters: [
+      {
+        id: 'sys-ch-1',
+        title: 'Bab 1: Struktur Automasi Pengiraan Royalti 95%',
+        wordCount: 1400,
+        content: `Sistem automasi royalti Karya Digital mengira agihan hasil jualan secara terus: 95% royalti bersih disalurkan ke dompet maya penulis secara automatik sejurus selepas transaksi selesai, manakala 5% diperuntukkan untuk kos infrastruktur pelayan.
+
+Kelebihan Automasi:
+- Tiada kelewatan pembayaran royalti bulanan.
+- Penulis boleh memohon pengeluaran terus ke akaun bank tempatan (Maybank, CIMB, Bank Islam, dll).
+- Ketelusan penuh dengan log transaksi jualan tanpa orang tengah.`
+      }
+    ]
   }
 ];

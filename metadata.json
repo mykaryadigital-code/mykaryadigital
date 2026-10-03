@@ -1,6 +1,6 @@
 {
-  "name": "Karya Digital - Platform Buku Digital & E-Reader",
-  "description": "Platform koleksi buku digital, e-reader moden dan marketplace penerbitan buku digital dengan sistem royalti 95% untuk penulis.",
+  "name": "MyKarya Digital | Studio & Hab Produk Digital",
+  "description": "Platform studio dan hab produk digital Malaysia. Membangunkan aplikasi web responsif, e-reader interaktif, serta penerbitan digital dengan 95% royalti telus.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

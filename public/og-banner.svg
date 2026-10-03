@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#042822" />
+      <stop offset="40%" stop-color="#063F35" />
+      <stop offset="100%" stop-color="#021411" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#EAB308" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="150" cy="150" r="320" fill="#006B57" opacity="0.35" filter="blur(80px)" />
+  <circle cx="1050" cy="480" r="300" fill="#047857" opacity="0.25" filter="blur(80px)" />
+  <circle cx="950" cy="150" r="220" fill="#EAB308" opacity="0.12" filter="blur(90px)" />
+
+  <!-- Architectural Dot Grid Overlay -->
+  <pattern id="dotGrid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.5" fill="#ffffff" opacity="0.07" />
+  </pattern>
+  <rect width="1200" height="630" fill="url(#dotGrid)" />
+
+  <!-- Outer Frame -->
+  <rect x="36" y="36" width="1128" height="558" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.5" />
+
+  <!-- Top Status Pill -->
+  <g transform="translate(80, 80)">
+    <rect width="290" height="38" rx="19" fill="#006B57" fill-opacity="0.5" stroke="#34D399" stroke-opacity="0.4" stroke-width="1.5" />
+    <circle cx="22" cy="19" r="5" fill="#34D399" />
+    <text x="36" y="24" fill="#D1FAE5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" letter-spacing="1">STUDIO &amp; HAB PRODUK DIGITAL</text>
+  </g>
+
+  <!-- Left Content Column -->
+  <!-- Logo & Title -->
+  <g transform="translate(80, 160)">
+    <!-- Brand KD Monogram Badge -->
+    <g transform="translate(0, 0)">
+      <rect width="76" height="76" rx="20" fill="#006B57" stroke="#EAB308" stroke-width="2" />
+      <g fill="#FFFFFF" transform="translate(13, 16) scale(0.08)">
+        <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />
+        <path d="M 224 285 L 395 110 L 442 110 L 442 128 C 420 128 406 138 388 160 L 268 290 L 375 422 C 398 450 418 462 445 464 L 445 482 C 415 482 382 475 352 442 L 252 316 L 224 345 L 224 285 Z" />
+        <path fill="#EAB308" d="M 240 310 L 345 428 C 405 496, 488 528, 595 528 C 715 528, 788 496, 820 460 C 830 450, 835 440, 838 428 C 830 460, 762 546, 595 546 C 475 546, 388 510, 318 430 L 224 324 Z" />
+        <path d="M 335 110 L 445 110 L 445 128 C 426 128 416 138 416 160 L 416 450 C 416 472 426 482 445 482 L 445 500 L 335 500 L 335 482 C 354 482 364 472 364 450 L 364 160 C 364 138 354 128 335 128 Z" />
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M 416 110 H 545 C 690 110, 792 196, 792 305 C 792 414, 690 500, 545 500 H 416 V 464 H 540 C 652 464, 725 398, 725 305 C 725 212, 652 146, 540 146 H 416 V 110 Z" />
+      </g>
+    </g>
+
+    <text x="96" y="42" fill="#FFFFFF" font-family="'Cinzel', Georgia, serif" font-size="38" font-weight="700" letter-spacing="1">MyKarya Digital</text>
+    <text x="96" y="68" fill="#A7F3D0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="500">Ekosistem Penerbitan &amp; Projek Web Interaktif Malaysia</text>
+  </g>
+
+  <!-- Big Catchy Headline -->
+  <text x="80" y="315" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.5">
+    Solusi Projek Web, E-Reader Interaktif &amp;
+  </text>
+  <text x="80" y="375" fill="url(#goldGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.5">
+    Ekosistem Royalti 95% Telus
+  </text>
+
+  <!-- Description paragraph -->
+  <text x="80" y="425" fill="#D1FAE5" opacity="0.9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="400">
+    Aplikasi web responsif, pembaca e-reader moden, serta pasaran buku digital
+  </text>
+  <text x="80" y="455" fill="#D1FAE5" opacity="0.9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="400">
+    dengan sokongan sandaran luar talian IndexedDB.
+  </text>
+
+  <!-- 3 Feature Badges Row -->
+  <g transform="translate(80, 500)">
+    <rect width="180" height="42" rx="12" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.2" />
+    <text x="90" y="26" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="600">⚡ Responsif &amp; Laju</text>
+
+    <g transform="translate(200, 0)">
+      <rect width="180" height="42" rx="12" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.2" />
+      <text x="90" y="26" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="600">📖 E-Reader Canvas</text>
+    </g>
+
+    <g transform="translate(400, 0)">
+      <rect width="200" height="42" rx="12" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.2" />
+      <text x="100" y="26" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="600">💰 95% Royalti Penulis</text>
+    </g>
+  </g>
+
+  <!-- Right Side Mockup / Showcase Card -->
+  <g transform="translate(740, 160)">
+    <rect width="380" height="380" rx="24" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5" />
+
+    <!-- Browser Mock Header -->
+    <rect width="380" height="44" rx="24" fill="#021411" fill-opacity="0.6" />
+    <circle cx="28" cy="22" r="5" fill="#EF4444" />
+    <circle cx="44" cy="22" r="5" fill="#F59E0B" />
+    <circle cx="60" cy="22" r="5" fill="#10B981" />
+    <rect x="85" y="12" width="210" height="20" rx="6" fill="#ffffff" fill-opacity="0.1" />
+    <text x="190" y="26" text-anchor="middle" fill="#ffffff" fill-opacity="0.5" font-family="monospace" font-size="10">mykaryadigital.com</text>
+
+    <!-- Mock Card Graphic Inside -->
+    <g transform="translate(30, 70)">
+      <rect width="320" height="150" rx="16" fill="#006B57" fill-opacity="0.3" stroke="#34D399" stroke-opacity="0.3" />
+      <text x="24" y="44" fill="#A7F3D0" font-family="sans-serif" font-size="12" font-weight="700" letter-spacing="1">PROJEK PILIHAN</text>
+      <text x="24" y="74" fill="#FFFFFF" font-family="sans-serif" font-size="18" font-weight="700">Karya E-Reader Interaktif</text>
+      <text x="24" y="100" fill="#E2E8F0" font-family="sans-serif" font-size="13">Pratonton Bab • Mod Gelap • Nota Suara</text>
+      <rect x="24" y="112" width="90" height="22" rx="11" fill="#34D399" />
+      <text x="69" y="127" text-anchor="middle" fill="#063F35" font-family="sans-serif" font-size="11" font-weight="800">LIVE DEMO</text>
+    </g>
+
+    <g transform="translate(30, 240)">
+      <rect width="320" height="100" rx="16" fill="#063F35" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.1" />
+      <text x="24" y="36" fill="#EAB308" font-family="sans-serif" font-size="12" font-weight="700">SISTEM ROYALTI &amp; E-DAGANG</text>
+      <text x="24" y="62" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="700">FPX • Kad • TNG eWallet</text>
+      <text x="24" y="84" fill="#A7F3D0" font-family="sans-serif" font-size="12">Agihan Segera: Penulis 95% | Platform 5%</text>
+    </g>
+  </g>
+</svg>

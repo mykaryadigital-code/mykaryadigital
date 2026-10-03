@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="kd-fav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006B57" />
+      <stop offset="100%" stop-color="#063F35" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Squircle with Subtle Gold Border -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#kd-fav-grad)" stroke="#EAB308" stroke-width="1.5" filter="url(#shadow)" />
+
+  <!-- Iconic KD Monogram -->
+  <g fill="#FFFFFF" transform="translate(11, 14) scale(0.065)">
+    <!-- Letter K Left Vertical Column -->
+    <path d="M 120 110 L 255 110 L 255 128 C 235 128 224 138 224 160 L 224 450 C 224 472 235 482 255 482 L 255 500 L 120 500 L 120 482 C 140 482 151 472 151 450 L 151 160 C 151 138 140 128 120 128 Z" />
+
+    <!-- Letter K Upper Diagonal -->
+    <path d="M 224 285 L 395 110 L 442 110 L 442 128 C 420 128 406 138 388 160 L 268 290 L 375 422 C 398 450 418 462 445 464 L 445 482 C 415 482 382 475 352 442 L 252 316 L 224 345 L 224 285 Z" />
+
+    <!-- Letter K Swoop Tail with gold accent -->
+    <path fill="#EAB308" d="M 240 310 L 345 428 C 405 496, 488 528, 595 528 C 715 528, 788 496, 820 460 C 830 450, 835 440, 838 428 C 830 460, 762 546, 595 546 C 475 546, 388 510, 318 430 L 224 324 Z" />
+
+    <!-- Letter D Left Stem -->
+    <path d="M 335 110 L 445 110 L 445 128 C 426 128 416 138 416 160 L 416 450 C 416 472 426 482 445 482 L 445 500 L 335 500 L 335 482 C 354 482 364 472 364 450 L 364 160 C 364 138 354 128 335 128 Z" />
+
+    <!-- Letter D Bowl -->
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M 416 110 H 545 C 690 110, 792 196, 792 305 C 792 414, 690 500, 545 500 H 416 V 464 H 540 C 652 464, 725 398, 725 305 C 725 212, 652 146, 540 146 H 416 V 110 Z" />
+  </g>
+</svg>

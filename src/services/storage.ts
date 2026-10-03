@@ -97,7 +97,11 @@ export async function getAllBooks(): Promise<Book[]> {
 
     request.onsuccess = () => {
       const rawBooks: Book[] = request.result || [];
-      const books: Book[] = rawBooks.map((b) => {
+      const existingIds = new Set(rawBooks.map((b) => b.id));
+      const missingInitial = INITIAL_BOOKS.filter((ib) => !existingIds.has(ib.id));
+      const allList = [...rawBooks, ...missingInitial];
+
+      const books: Book[] = allList.map((b) => {
         if (b.price === undefined || b.price === null) {
           const match = INITIAL_BOOKS.find((ib) => ib.id === b.id || ib.title === b.title);
           return {

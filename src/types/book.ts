@@ -1,5 +1,9 @@
 export type BookCategory = 
   | 'Panduan'
+  | 'Aplikasi Web'
+  | 'Bisnes & E-Dagang'
+  | 'Sistem & Automasi'
+  | 'Novel & Sastera'
   | 'Fiksi Umum'
   | 'Novel Sastra'
   | 'Resepi'
