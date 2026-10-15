@@ -3,6 +3,7 @@ export type BookCategory =
   | 'Aplikasi Web'
   | 'Bisnes & E-Dagang'
   | 'Sistem & Automasi'
+  | 'Templat & Kod'
   | 'Novel & Sastera'
   | 'Fiksi Umum'
   | 'Novel Sastra'
@@ -81,6 +82,8 @@ export interface Book {
   chapters: Chapter[];
   fileType: 'epub' | 'txt' | 'custom' | 'md';
   originalFileName?: string;
+  isDemo?: boolean; // Naskhah contoh / data demo
+  itemType?: 'book' | 'project'; // Asingkan Buku vs Projek Digital
 }
 
 export type ReaderThemeMode = 'sepia' | 'dark' | 'light' | 'midnight' | 'forest';

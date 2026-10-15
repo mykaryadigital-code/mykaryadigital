@@ -5,13 +5,10 @@ import { BookPurchaseModal } from './BookPurchaseModal';
 import { BookCover } from './BookCover';
 import {
   Heart,
-  MoreVertical,
-  Check,
-  Edit3,
-  Trash2,
-  Share2,
   BookOpen,
-  Info,
+  RotateCcw,
+  CheckCircle2,
+  Sparkles,
 } from 'lucide-react';
 
 interface BookCardProps {
@@ -29,13 +26,8 @@ export const BookCard: React.FC<BookCardProps> = ({
   onOpenReader,
   onOpenDetail,
   onToggleFavorite,
-  onDeleteBook,
-  onEditBook,
 }) => {
-  const [showMenu, setShowMenu] = useState(false);
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [copiedToast, setCopiedToast] = useState(false);
   const [imageError, setImageError] = useState(false);
   const { isBookPurchased } = useMarketplace();
 
@@ -43,360 +35,212 @@ export const BookCard: React.FC<BookCardProps> = ({
   const purchased = isBookPurchased(book.id) || isFree;
   const imageSource = !imageError ? (book.imageUrl || book.coverUrl) : null;
 
+  // Format currency
   const formatPrice = (price?: number, currency: string = 'RM') => {
     if (price === undefined || price === null || price === 0) return 'Percuma';
     return `${currency} ${price.toFixed(2)}`;
   };
 
-  const handleCopyLink = () => {
-    setShowMenu(false);
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedToast(true);
-      setTimeout(() => setCopiedToast(false), 2200);
-    }
-  };
+  // Status calculation: 0 = Belum Mula, 1-99 = Sedang Dibaca, 100 = Selesai
+  const progress = Math.max(0, Math.min(100, Math.round(book.currentProgress || 0)));
+  const isCompleted = progress >= 100;
+  const isInProgress = progress > 0 && progress < 100;
+  const isNotStarted = progress === 0;
 
-  const handleDelete = () => {
-    setShowMenu(false);
-    setShowDeleteConfirm(false);
-    onDeleteBook(book.id);
-  };
-
-  const handleReadClick = () => {
-    if (purchased || (book.freeChapterCount && book.freeChapterCount > 0)) {
-      onOpenReader(book);
-    } else {
+  // Primary Action Handler
+  const handlePrimaryAction = () => {
+    if (isNotStarted && !purchased && !book.freeChapterCount) {
       setIsPurchaseOpen(true);
+      return;
     }
+    // Open reader directly
+    onOpenReader(book);
   };
 
-  // Subtle ambient backdrop color based on book category/theme
-  const getAmbientGlow = (category: string) => {
-    switch (category) {
-      case 'Novel Sastra':
-      case 'Novel & Sastera':
-        return 'rgba(30, 58, 138, 0.2)';
-      case 'Misteri & Detektif':
-        return 'rgba(131, 24, 67, 0.2)';
-      case 'Fantasi & Petualangan':
-      case 'Aplikasi Web':
-        return 'rgba(5, 150, 105, 0.2)';
-      case 'Resepi':
-        return 'rgba(194, 65, 12, 0.2)';
-      case 'Romansa':
-        return 'rgba(225, 29, 72, 0.2)';
-      default:
-        return 'rgba(0, 107, 87, 0.2)';
+  // Primary button label & icon
+  const getButtonConfig = () => {
+    if (isCompleted) {
+      return {
+        label: 'Baca Semula',
+        icon: RotateCcw,
+        variant: 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
+      };
     }
+    if (isInProgress) {
+      return {
+        label: 'Sambung Membaca',
+        icon: BookOpen,
+        variant: 'bg-[#006B57] hover:bg-[#063F35] text-white shadow-xs',
+      };
+    }
+    // isNotStarted
+    if (!purchased && !isFree && (!book.freeChapterCount || book.freeChapterCount <= 0)) {
+      return {
+        label: `Dapatkan • ${formatPrice(book.price)}`,
+        icon: Sparkles,
+        variant: 'bg-[#006B57] hover:bg-[#063F35] text-white shadow-xs',
+      };
+    }
+    return {
+      label: 'Mula Membaca',
+      icon: BookOpen,
+      variant: 'bg-[#006B57] hover:bg-[#063F35] text-white shadow-xs',
+    };
   };
+
+  const btnConfig = getButtonConfig();
+  const BtnIcon = btnConfig.icon;
 
   return (
     <>
-      <article className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group relative select-none">
-        {/* Toast Notification */}
-        {copiedToast && (
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-40 bg-[#063F35] text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-in fade-in-50 duration-150">
-            <Check className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Pautan naskhah berjaya disalin!</span>
-          </div>
-        )}
-
+      <article className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col group relative select-none">
         {/* ======================================================== */}
-        {/* 1. STAGE PAMERAN BUKU (NATURAL PORTRAIT 3D HARDCOVER)     */}
+        {/* 1. COVER SHOWCASE (NATURAL PORTRAIT 2:3 WITH 3D DEPTH)   */}
         {/* ======================================================== */}
-        <div className="relative w-full min-h-[290px] sm:min-h-[310px] p-6 sm:p-7 flex flex-col items-center justify-center bg-gradient-to-b from-stone-100/90 via-slate-50/70 to-white dark:from-slate-800/80 dark:via-slate-900/60 dark:to-slate-900/95 border-b border-slate-100 dark:border-slate-800/80 overflow-hidden">
-          {/* Ambient Studio Lighting Glow */}
-          <div
-            className="absolute inset-0 blur-3xl opacity-40 dark:opacity-25 pointer-events-none transform scale-90"
-            style={{ background: getAmbientGlow(book.category) }}
-          />
+        <div
+          onClick={() => onOpenDetail(book)}
+          className="relative w-full h-[225px] sm:h-[245px] p-4 flex items-center justify-center bg-gradient-to-b from-stone-100/80 via-slate-50/60 to-white dark:from-slate-800/80 dark:via-slate-900/60 dark:to-slate-900 border-b border-slate-100 dark:border-slate-800/80 overflow-hidden cursor-pointer"
+        >
+          {/* Subtle Ambient Color Glow */}
+          <div className="absolute inset-0 bg-emerald-500/10 dark:bg-emerald-400/5 blur-2xl transform scale-75 pointer-events-none" />
 
-          {/* Top Stage Left: Status or Price Badge */}
-          <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5">
-            {book.status === 'reading' ? (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-700/90 text-white backdrop-blur-md shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-                <span>Sedang Dibaca</span>
+          {/* Top Left: Demo Badge / Status */}
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
+            {book.isDemo && (
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-900/75 text-amber-300 border border-amber-400/30 backdrop-blur-md shadow-2xs">
+                Demo
               </span>
-            ) : (
-              <span
-                className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold backdrop-blur-md shadow-xs ${
-                  isFree
-                    ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30'
-                    : 'bg-black/60 text-white border border-white/20'
-                }`}
-              >
-                {formatPrice(book.price)}
+            )}
+
+            {isCompleted && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-600/90 text-white backdrop-blur-md shadow-2xs">
+                <CheckCircle2 className="w-2.5 h-2.5" />
+                <span>Selesai</span>
               </span>
             )}
           </div>
 
-          {/* Top Stage Right: Favorite & Quick Menu */}
-          <div className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5">
-            {/* Favorite Button */}
+          {/* Top Right: Favorite Button */}
+          <div className="absolute top-3 right-3 z-20">
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 onToggleFavorite(book.id, book.isFavorite);
               }}
-              className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-xs ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-xs active:scale-95 ${
                 book.isFavorite
                   ? 'bg-rose-500 text-white'
-                  : 'bg-black/35 hover:bg-black/60 text-white/80 hover:text-white'
+                  : 'bg-black/30 hover:bg-black/50 text-white/80 hover:text-white'
               }`}
               title={book.isFavorite ? 'Buang daripada kegemaran' : 'Tambah ke kegemaran'}
               aria-label="Kegemaran"
             >
-              <Heart className={`w-4 h-4 ${book.isFavorite ? 'fill-current' : ''}`} />
+              <Heart className={`w-3.5 h-3.5 ${book.isFavorite ? 'fill-current' : ''}`} />
             </button>
-
-            {/* Quick Menu */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowMenu(!showMenu);
-                }}
-                className="w-8 h-8 rounded-full bg-black/35 hover:bg-black/60 text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer shadow-xs"
-                title="Pilihan lanjut"
-                aria-label="Pilihan lanjut"
-              >
-                <MoreVertical className="w-4 h-4" />
-              </button>
-
-              {/* Dropdown Menu */}
-              {showMenu && (
-                <>
-                  <div className="fixed inset-0 z-30" onClick={() => setShowMenu(false)} />
-                  <div className="absolute right-0 top-10 z-40 w-44 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl py-1 text-xs animate-in fade-in-50 duration-150">
-                    {onEditBook && (
-                      <button
-                        onClick={() => {
-                          setShowMenu(false);
-                          onEditBook(book);
-                        }}
-                        className="w-full flex items-center gap-2 px-3.5 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                      >
-                        <Edit3 className="w-3.5 h-3.5 text-slate-400" />
-                        <span>Sunting Naskhah</span>
-                      </button>
-                    )}
-
-                    <button
-                      onClick={handleCopyLink}
-                      className="w-full flex items-center gap-2 px-3.5 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                    >
-                      <Share2 className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Salin Pautan</span>
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        setShowMenu(false);
-                        setShowDeleteConfirm(true);
-                      }}
-                      className="w-full flex items-center gap-2 px-3.5 py-2 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer border-t border-slate-100 dark:border-slate-800"
-                    >
-                      <Trash2 className="w-3.5 h-3.5 text-rose-500" />
-                      <span>Padam Naskhah</span>
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
           </div>
 
-          {/* THE 3D BOOK COVER OBJECT (NATURAL PORTRAIT RATIO) */}
-          <div
-            onClick={handleReadClick}
-            className="relative z-10 w-[155px] sm:w-[170px] aspect-[2/3] max-h-[255px] rounded-r-md rounded-l-xs cursor-pointer group/cover transition-all duration-300 transform group-hover:-translate-y-2 group-hover:scale-[1.02]"
-            title={`Ketik untuk membaca "${book.title}"`}
-          >
-            {/* 3D Realistic Book Drop Shadow on Ground */}
-            <div className="absolute -bottom-3 inset-x-3 h-5 bg-black/40 dark:bg-black/70 blur-md rounded-full pointer-events-none transform scale-95 transition-all duration-300 group-hover:scale-105 group-hover:opacity-70" />
-
+          {/* The 3D Book Object */}
+          <div className="relative z-10 w-[125px] sm:w-[140px] aspect-[2/3] max-h-[210px] rounded-r-md rounded-l-xs shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] dark:shadow-[0_14px_30px_-5px_rgba(0,0,0,0.6)] group-hover:scale-[1.03] group-hover:-translate-y-1 transition-transform duration-300">
             {imageSource ? (
-              /* Real Custom / Uploaded Book Cover (Displays FULL portrait without clipping) */
-              <div className="relative w-full h-full rounded-r-md rounded-l-xs overflow-hidden book-spine-effect shadow-[0_12px_28px_-6px_rgba(0,0,0,0.35)] dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.65)] bg-slate-900 border-r-2 border-amber-50/20">
-                {/* Book Spine Line Shader */}
+              <div className="relative w-full h-full rounded-r-md rounded-l-xs overflow-hidden book-spine-effect bg-slate-900 border-r border-amber-50/20">
                 <div className="book-spine-line" />
-
-                {/* Left Spine Fold Depth Gradient */}
-                <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/45 via-black/15 to-transparent pointer-events-none z-10" />
-
-                {/* Real Book Cover Image - Clean object-cover in portrait 2:3 */}
+                <div className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none z-10" />
                 <img
                   src={imageSource}
                   alt={book.title}
                   loading="lazy"
                   onError={() => setImageError(true)}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover/cover:scale-105"
+                  className="w-full h-full object-cover select-none"
                 />
-
-                {/* Top Subtle Gloss Reflection */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none opacity-60 group-hover/cover:opacity-80 transition-opacity" />
-
-                {/* Hover Read Indicator Pill */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/cover:opacity-100 transition-opacity flex items-center justify-center p-3 backdrop-blur-[1px]">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#006B57] text-white text-xs font-semibold shadow-lg transform translate-y-1 group-hover/cover:translate-y-0 transition-transform">
-                    <BookOpen className="w-3.5 h-3.5" />
-                    <span>Baca Naskhah</span>
-                  </span>
-                </div>
               </div>
             ) : (
-              /* Thematic Classical Typography Book Cover */
-              <div className="w-full h-full flex items-center justify-center">
-                <BookCover
-                  title={book.title}
-                  author={book.author}
-                  coverTheme={book.coverTheme}
-                  size="md"
-                  className="w-full h-full shadow-[0_12px_28px_-6px_rgba(0,0,0,0.35)]"
-                />
-              </div>
+              <BookCover
+                title={book.title}
+                author={book.author}
+                coverTheme={book.coverTheme}
+                size="sm"
+                className="w-full h-full"
+              />
             )}
           </div>
-
-          {/* Reading Progress Line (if in progress) */}
-          {book.currentProgress > 0 && (
-            <div className="relative z-10 w-[155px] sm:w-[170px] mt-3 space-y-1 text-left">
-              <div className="flex items-center justify-between text-[10px] font-mono-data text-slate-500 dark:text-slate-400">
-                <span>Kemajuan</span>
-                <span className="font-semibold text-[#006B57] dark:text-emerald-400">
-                  {book.currentProgress}%
-                </span>
-              </div>
-              <div className="w-full h-1 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#006B57] to-emerald-400 rounded-full transition-all duration-300"
-                  style={{ width: `${book.currentProgress}%` }}
-                />
-              </div>
-            </div>
-          )}
         </div>
 
         {/* ======================================================== */}
-        {/* 2. MAKLUMAT EDITORIAL & TIPOGRAFI NASKHAH                 */}
+        {/* 2. MAKLUMAT RINGKAS: TAJUK, PENULIS, HARGA / KEMAJUAN     */}
         {/* ======================================================== */}
-        <div className="p-5 flex-1 flex flex-col justify-between text-left space-y-3.5">
-          <div className="space-y-1.5">
-            {/* Kategori Unboxed Kicker */}
-            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-[#006B57] dark:text-emerald-400">
-              <span>{book.category}</span>
-              <span className="font-mono-data text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                {book.sku || 'KARYA-DIGITAL'}
-              </span>
-            </div>
-
-            {/* Tajuk Buku Berkualiti Tinggi (Serif Sastera) */}
+        <div className="p-4 flex-1 flex flex-col justify-between text-left space-y-3">
+          <div>
+            {/* Tajuk Buku */}
             <h3
-              onClick={handleReadClick}
-              className="font-serif-book font-bold text-lg sm:text-[19px] text-slate-900 dark:text-white leading-snug line-clamp-1 group-hover:text-[#006B57] dark:group-hover:text-emerald-400 transition-colors cursor-pointer"
+              onClick={() => onOpenDetail(book)}
+              className="font-serif-book font-bold text-base sm:text-[17px] text-slate-900 dark:text-white leading-snug line-clamp-1 group-hover:text-[#006B57] dark:group-hover:text-emerald-400 transition-colors cursor-pointer"
               title={book.title}
             >
               {book.title}
             </h3>
 
             {/* Nama Penulis */}
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium truncate">
-              oleh <span className="text-slate-900 dark:text-slate-100 font-semibold">{book.author}</span>
-            </p>
-
-            {/* Sinopsis / Penerangan Ringkas */}
-            <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed pt-1">
-              {book.description}
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium truncate mt-0.5">
+              {book.author}
             </p>
           </div>
 
-          {/* Metadata Naskhah (Unboxed, bersih dengan pembahagi titik ·) */}
-          <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400 font-medium pt-1 border-t border-slate-100 dark:border-slate-800">
-            <span>{book.totalWords ? `${book.totalWords.toLocaleString('ms-MY')} kata` : 'Edisi Lengkap'}</span>
-            <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
-            <span>~{book.estimatedReadTimeMinutes || 20} min baca</span>
-            {book.salesCount ? (
-              <>
-                <span aria-hidden="true" className="text-slate-300 dark:text-slate-600">·</span>
-                <span>{book.salesCount} pembaca</span>
-              </>
-            ) : null}
+          {/* Baris Status: Kemajuan Bacaan ATAU Harga */}
+          <div className="pt-1">
+            {isInProgress ? (
+              /* Kemajuan Bacaan (1% - 99%) */
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[11px] font-mono-data">
+                  <span className="text-slate-500 dark:text-slate-400">Kemajuan bacaan</span>
+                  <span className="font-bold text-[#006B57] dark:text-emerald-400">{progress}%</span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#006B57] to-emerald-400 rounded-full transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+            ) : isCompleted ? (
+              /* Selesai 100% */
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Selesai dibaca</span>
+                </span>
+                <span className="font-mono-data text-[11px] text-slate-400">100%</span>
+              </div>
+            ) : (
+              /* Belum Mula: Papar Harga */
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">Harga</span>
+                <span
+                  className={`text-sm font-bold tracking-tight ${
+                    isFree ? 'text-[#006B57] dark:text-emerald-400' : 'text-slate-900 dark:text-white'
+                  }`}
+                >
+                  {formatPrice(book.price)}
+                </span>
+              </div>
+            )}
           </div>
-        </div>
 
-        {/* ======================================================== */}
-        {/* 3. BAHAGIAN BAWAH (ACTION FOOTER): HARGA & BACA NASKHAH  */}
-        {/* ======================================================== */}
-        <div className="border-t border-slate-100 dark:border-slate-800/80 px-5 py-3.5 flex items-center justify-between gap-3 mt-auto bg-slate-50/50 dark:bg-slate-900/50">
-          {/* Harga Naskhah */}
-          <div>
-            <span className="text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-semibold block leading-tight">
-              Harga
-            </span>
-            <span
-              className={`text-sm font-bold tracking-tight ${
-                isFree ? 'text-[#006B57] dark:text-emerald-400' : 'text-slate-900 dark:text-white'
-              }`}
-            >
-              {formatPrice(book.price)}
-            </span>
-          </div>
-
-          {/* Butang Tindakan */}
-          <div className="flex items-center gap-2">
+          {/* ======================================================== */}
+          {/* 3. SATU BUTANG UTAMA (MINIMUM 44PX TARGET TOUCH)          */}
+          {/* ======================================================== */}
+          <div className="pt-1">
             <button
               type="button"
-              onClick={() => onOpenDetail(book)}
-              className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              title="Maklumat terperinci naskhah"
-              aria-label="Maklumat terperinci"
+              onClick={handlePrimaryAction}
+              className={`w-full min-h-[44px] h-11 px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer ${btnConfig.variant}`}
             >
-              <Info className="w-4 h-4" />
-            </button>
-
-            <button
-              type="button"
-              onClick={handleReadClick}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-[#006B57] hover:bg-[#063F35] dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white shadow-2xs hover:shadow-xs transition-all active:scale-[0.97] cursor-pointer"
-              title="Buka naskhah di e-reader pelayar"
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>{purchased ? 'Mula Membaca' : isFree ? 'Baca Percuma' : 'Buka Naskhah'}</span>
+              <BtnIcon className="w-4 h-4 shrink-0" />
+              <span className="truncate">{btnConfig.label}</span>
             </button>
           </div>
         </div>
       </article>
-
-      {/* Delete Confirmation Dialog */}
-      {showDeleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in-50 duration-150">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 text-left">
-            <h4 className="text-base font-bold text-slate-900 dark:text-white">Padam Naskhah?</h4>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Adakah anda pasti ingin memadam naskhah <strong>"{book.title}"</strong>? Tindakan ini tidak boleh dibatalkan.
-            </p>
-            <div className="flex items-center justify-end gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setShowDeleteConfirm(false)}
-                className="px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
-              >
-                Batal
-              </button>
-              <button
-                type="button"
-                onClick={handleDelete}
-                className="px-4 py-2 text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white rounded-xl transition-colors cursor-pointer shadow-xs"
-              >
-                Padam
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Book Purchase Modal if locked */}
       {isPurchaseOpen && (

@@ -103,8 +103,18 @@ export async function getAllBooks(): Promise<Book[]> {
 
       const books: Book[] = allList.map((b) => {
         const match = INITIAL_BOOKS.find((ib) => ib.id === b.id || ib.title === b.title);
+        const isSample = Boolean(match || b.id.startsWith('buku-'));
+        const isProjectCategory =
+          b.category === 'Aplikasi Web' ||
+          b.category === 'Sistem & Automasi' ||
+          b.category === 'Bisnes & E-Dagang' ||
+          b.category === 'Templat & Kod' ||
+          b.id === 'buku-panduan-penulis-pantas';
+
         const updated: Book = {
           ...b,
+          isDemo: b.isDemo !== undefined ? b.isDemo : isSample,
+          itemType: b.itemType || (isProjectCategory ? 'project' : 'book'),
           imageUrl: b.imageUrl || match?.imageUrl,
           coverUrl: b.coverUrl || match?.coverUrl,
         };

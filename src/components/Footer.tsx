@@ -89,7 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenContact }) =>
                     onClick={() => onSelectTab && onSelectTab('backup')}
                     className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#006B57] dark:focus-visible:ring-emerald-400 rounded-md"
                   >
-                    Sandaran Luar Talian (IndexedDB)
+                    Simpanan Setempat Peranti
                   </button>
                 </li>
               </ul>
@@ -188,8 +188,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenContact }) =>
               {showTermsModal === 'privasi' ? (
                 <>
                   <p>
-                    Semua fail naskhah, rekod penanda buku (*bookmarks*), dan sorotan teks disimpan secara selamat
-                    dalam pangkalan data peribadi pelayar anda menggunakan teknologi IndexedDB.
+                    Semua fail naskhah, rekod penanda buku (*bookmarks*), dan kemajuan bacaan disimpan secara selamat
+                    di dalam storan peribadi pelayar peranti anda tanpa memerlukan sambungan luar.
                   </p>
                   <p>
                     Data anda tidak dimuat naik atau dipantau tanpa kebenaran eksplisit anda. Kami komited memelihara
