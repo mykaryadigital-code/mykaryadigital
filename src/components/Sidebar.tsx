@@ -206,7 +206,77 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </button>
           </div>
 
-          {/* Section 2: BUKU SAYA */}
+          {/* Section 2: KATEGORI BUKU / PROJEK DI BAHAGIAN ATAS */}
+          <div className="space-y-1 pt-3 border-t border-[#E2E8F0] dark:border-slate-800">
+            <div className="flex items-center justify-between px-3 mb-2">
+              <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">
+                {activeSpace === 'projects' ? 'Kategori Projek' : 'Kategori Buku'}
+              </span>
+              {selectedCategory !== 'Semua' && (
+                <button
+                  onClick={() => onSelectCategory('Semua')}
+                  className="text-[11px] font-semibold text-[#006B57] dark:text-emerald-400 hover:underline cursor-pointer"
+                >
+                  Semua
+                </button>
+              )}
+            </div>
+
+            {/* Semua Kategori */}
+            <button
+              onClick={() => handleCategoryClick('Semua')}
+              className={`w-full min-h-[38px] flex items-center justify-between px-3 py-2 rounded-[10px] text-xs transition-colors cursor-pointer ${
+                selectedCategory === 'Semua'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006B57] dark:text-emerald-400 font-bold border border-emerald-200/60 dark:border-emerald-800/60'
+                  : 'text-[#102A27] dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/70 font-medium'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Layers className="w-3.5 h-3.5 text-slate-400" />
+                <span>Semua Kategori</span>
+              </div>
+              <span className="text-[11px] font-mono-data text-slate-400">
+                {categoryCounts['Semua'] || totalBooksCount}
+              </span>
+            </button>
+
+            {/* Senarai Kategori Mengikut Ruang (Buku vs Projek) */}
+            {(activeSpace === 'projects' ? PROJECT_CATEGORIES_LIST : BOOK_CATEGORIES_LIST).map((cat) => {
+              const Icon = cat.icon;
+              const isSelected = selectedCategory === cat.label || selectedCategory === cat.value;
+              const count = categoryCounts[cat.label] || categoryCounts[cat.value] || 0;
+
+              return (
+                <button
+                  key={cat.label}
+                  onClick={() => handleCategoryClick(cat.value)}
+                  className={`w-full min-h-[38px] flex items-center justify-between px-3 py-2 rounded-[10px] text-xs transition-colors cursor-pointer ${
+                    isSelected
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006B57] dark:text-emerald-400 font-bold border border-emerald-200/60 dark:border-emerald-800/60'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/70 font-medium'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Icon
+                      className={`w-3.5 h-3.5 ${
+                        isSelected ? 'text-[#006B57] dark:text-emerald-400' : 'text-slate-400'
+                      }`}
+                    />
+                    <span>{cat.label}</span>
+                  </div>
+                  <span
+                    className={`text-[11px] font-mono-data ${
+                      isSelected ? 'text-[#006B57] dark:text-emerald-400 font-semibold' : 'text-slate-400'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Section 3: BUKU SAYA */}
           <div className="space-y-1 pt-3 border-t border-[#E2E8F0] dark:border-slate-800">
             <span className="px-3 text-[11px] font-bold text-[#64748B] dark:text-slate-400 uppercase tracking-wider block mb-2">
               Buku Saya
@@ -278,76 +348,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span>Rak Kustom</span>
               </div>
             </button>
-          </div>
-
-          {/* Section 3: KATEGORI KONSISTEN (Mengikut Ruang) */}
-          <div className="space-y-1 pt-3 border-t border-[#E2E8F0] dark:border-slate-800">
-            <div className="flex items-center justify-between px-3 mb-2">
-              <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-400 uppercase tracking-wider">
-                {activeSpace === 'projects' ? 'Kategori Projek' : 'Kategori Buku'}
-              </span>
-              {selectedCategory !== 'Semua' && (
-                <button
-                  onClick={() => onSelectCategory('Semua')}
-                  className="text-[11px] font-semibold text-[#006B57] dark:text-emerald-400 hover:underline cursor-pointer"
-                >
-                  Semua
-                </button>
-              )}
-            </div>
-
-            {/* Semua Kategori */}
-            <button
-              onClick={() => handleCategoryClick('Semua')}
-              className={`w-full min-h-[38px] flex items-center justify-between px-3 py-2 rounded-[10px] text-xs transition-colors cursor-pointer ${
-                selectedCategory === 'Semua'
-                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006B57] dark:text-emerald-400 font-bold border border-emerald-200/60 dark:border-emerald-800/60'
-                  : 'text-[#102A27] dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/70 font-medium'
-              }`}
-            >
-              <div className="flex items-center gap-2.5">
-                <Layers className="w-3.5 h-3.5 text-slate-400" />
-                <span>Semua Kategori</span>
-              </div>
-              <span className="text-[11px] font-mono-data text-slate-400">
-                {categoryCounts['Semua'] || totalBooksCount}
-              </span>
-            </button>
-
-            {/* Senarai Kategori Mengikut Ruang (Buku vs Projek) */}
-            {(activeSpace === 'projects' ? PROJECT_CATEGORIES_LIST : BOOK_CATEGORIES_LIST).map((cat) => {
-              const Icon = cat.icon;
-              const isSelected = selectedCategory === cat.label || selectedCategory === cat.value;
-              const count = categoryCounts[cat.label] || categoryCounts[cat.value] || 0;
-
-              return (
-                <button
-                  key={cat.label}
-                  onClick={() => handleCategoryClick(cat.value)}
-                  className={`w-full min-h-[38px] flex items-center justify-between px-3 py-2 rounded-[10px] text-xs transition-colors cursor-pointer ${
-                    isSelected
-                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006B57] dark:text-emerald-400 font-bold border border-emerald-200/60 dark:border-emerald-800/60'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/70 font-medium'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Icon
-                      className={`w-3.5 h-3.5 ${
-                        isSelected ? 'text-[#006B57] dark:text-emerald-400' : 'text-slate-400'
-                      }`}
-                    />
-                    <span>{cat.label}</span>
-                  </div>
-                  <span
-                    className={`text-[11px] font-mono-data ${
-                      isSelected ? 'text-[#006B57] dark:text-emerald-400 font-semibold' : 'text-slate-400'
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
           </div>
 
           {/* Section 4: UTILITI SIMPANAN DATA */}

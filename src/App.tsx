@@ -417,6 +417,15 @@ function MainAppContent() {
           ) : activeSpace === 'projects' ? (
             /* C. RUANG KHAS: PROJEK DIGITAL (Aplikasi Web, Sistem & Kod) */
             <div className="space-y-6 text-left animate-in fade-in duration-200">
+              {/* Penapis Kategori Projek Digital di bahagian atas */}
+              <ProjectFilterBar
+                categories={currentCategoriesList}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+                categoryCounts={categoryCounts}
+                totalCount={projectItems.length}
+              />
+
               <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-[#006B57] dark:text-emerald-400 text-xs font-semibold mb-2">
                   <Code2 className="w-3.5 h-3.5" />
@@ -429,15 +438,6 @@ function MainAppContent() {
                   Terokai aplikasi e-reader berasaskan web, sistem royalti berautomasi, dan peralatan digital untuk komuniti pembaca dan pengarang.
                 </p>
               </div>
-
-              {/* Penapis Kategori Projek Digital */}
-              <ProjectFilterBar
-                categories={currentCategoriesList}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-                categoryCounts={categoryCounts}
-                totalCount={projectItems.length}
-              />
 
               {/* Grid Projek Digital */}
               {displayedItems.length === 0 ? (
@@ -460,14 +460,46 @@ function MainAppContent() {
           ) : (
             /* D. RUANG BUKU & BUKU SAYA (Koleksi Buku, Sedang Dibaca, Selesai, Kegemaran) */
             <>
-              {/* Susunan Halaman Utama mengikut Keperluan 2:
-                  1. Carian (Sudah ada di bar atas / bar penapis aktif)
-                  2. Banner Pengenalan Kecil (CompactHeroBanner)
-                  3. Sambung Membaca (ContinueReadingStrip)
-                  4. Penapis Kategori Buku (ProjectFilterBar)
-                  5. Koleksi Buku (BookCard)
-                  6. Banner Kecil Jadi Penulis (WriterSmallBanner)
-              */}
+              {/* 1. PENAPIS KATEGORI BUKU DILETAK DI BAHAGIAN PALING ATAS */}
+              <div className="pt-0.5">
+                <ProjectFilterBar
+                  categories={currentCategoriesList}
+                  selectedCategory={selectedCategory}
+                  onSelectCategory={setSelectedCategory}
+                  categoryCounts={categoryCounts}
+                  totalCount={bookItems.length}
+                />
+              </div>
+
+              {/* Bar Penunjuk Carian / Rak Aktif */}
+              {(searchQuery || activeShelfFilter) && (
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <Filter className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
+                    <span>Penapis Aktif:</span>
+                    {searchQuery && (
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">
+                        Carian "{searchQuery}"
+                      </span>
+                    )}
+                    {activeShelfFilter && (
+                      <span className="font-semibold text-amber-700 dark:text-amber-400">
+                        Rak: {activeShelfFilter}
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setActiveShelfFilter(null);
+                      setSelectedCategory('Semua');
+                    }}
+                    className="text-[#006B57] dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
+                  >
+                    Set Semula
+                  </button>
+                </div>
+              )}
 
               {/* Ruang Header / Title jika dalam 'Sedang Dibaca', 'Selesai', atau 'Kegemaran' */}
               {activeSpace === 'reading' ? (
@@ -507,7 +539,7 @@ function MainAppContent() {
                   </div>
                 </div>
               ) : (
-                /* Banner Pengenalan Yang Dikecilkan (Keperluan 2) */
+                /* Banner Pengenalan Yang Dikecilkan */
                 <CompactHeroBanner
                   onExploreBooks={() => {
                     const el = document.getElementById('koleksi-buku-grid');
@@ -517,7 +549,7 @@ function MainAppContent() {
                 />
               )}
 
-              {/* 3. Sambung Membaca (Hanya muncul jika ada buku dalam kemajuan 1–99%) */}
+              {/* Sambung Membaca (Hanya muncul jika ada buku dalam kemajuan 1–99%) */}
               {activeSpace === 'books' && (
                 <ContinueReadingStrip
                   books={books}
@@ -526,44 +558,7 @@ function MainAppContent() {
                 />
               )}
 
-              {/* 4. Penapis Kategori (Satu senarai konsisten dalam Bahasa Melayu) */}
-              <ProjectFilterBar
-                categories={currentCategoriesList}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-                categoryCounts={categoryCounts}
-                totalCount={bookItems.length}
-              />
 
-              {/* Bar Penunjuk Carian / Rak Aktif */}
-              {(searchQuery || activeShelfFilter) && (
-                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-left">
-                  <div className="flex items-center gap-2">
-                    <Filter className="w-3.5 h-3.5 text-[#006B57] dark:text-emerald-400" />
-                    <span>Penapis Aktif:</span>
-                    {searchQuery && (
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        Carian "{searchQuery}"
-                      </span>
-                    )}
-                    {activeShelfFilter && (
-                      <span className="font-semibold text-amber-700 dark:text-amber-400">
-                        Rak: {activeShelfFilter}
-                      </span>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => {
-                      setSearchQuery('');
-                      setActiveShelfFilter(null);
-                      setSelectedCategory('Semua');
-                    }}
-                    className="text-[#006B57] dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
-                  >
-                    Set Semula
-                  </button>
-                </div>
-              )}
 
               {/* 5. Koleksi Buku: Kad Buku Yang Diringkaskan (Cover, Tajuk, Penulis, Harga/Kemajuan, 1 Butang) */}
               {isLoading ? (
