@@ -92,14 +92,6 @@ export const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({
             );
           })}
         </div>
-
-        {/* Clean right indicator on tablet/desktop */}
-        {totalCount !== undefined && (
-          <div className="hidden md:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 shrink-0 font-medium">
-            <span>Menapis:</span>
-            <strong className="text-slate-800 dark:text-slate-200 font-semibold">{selectedCategory}</strong>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -150,6 +150,9 @@ function MainAppContent() {
     };
 
     books.forEach((book) => {
+      if (book.category) {
+        counts[book.category] = (counts[book.category] || 0) + 1;
+      }
       const bCat = (book.category || '').toLowerCase();
       const bTags = (book.tags || []).map((t) => t.toLowerCase());
 
@@ -196,6 +199,15 @@ function MainAppContent() {
     });
 
     return counts;
+  }, [books]);
+
+  // Dynamic categories including standard and custom book categories
+  const dynamicCategories = useMemo(() => {
+    const base = ['Semua', 'Novel & Sastera', 'Aplikasi Web', 'Bisnes & E-Dagang', 'Sistem & Automasi'];
+    const custom = Array.from(new Set(books.map((b) => b.category))).filter(
+      (c) => c && !base.includes(c)
+    );
+    return [...base, ...custom];
   }, [books]);
 
   // Reading books count
@@ -431,7 +443,7 @@ function MainAppContent() {
 
               {/* Category Filter Bar (Pills/Tabs) - Mobile-First Horizontal Scroll */}
               <ProjectFilterBar
-                categories={['Semua', 'Aplikasi Web', 'Bisnes & E-Dagang', 'Sistem & Automasi', 'Novel & Sastera']}
+                categories={dynamicCategories}
                 selectedCategory={selectedCategory}
                 onSelectCategory={(cat) => {
                   setSelectedCategory(cat);
